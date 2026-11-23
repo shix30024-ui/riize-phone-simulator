@@ -301,49 +301,100 @@ const posts=[
 ];
 let xActiveTab='为你推荐';
 function xscreen(){
- let tabs=['为你推荐','正在关注','添加＋','棒球'];
- const cp=currentCp(), ship=currentCpName(), shipAlt=cp[1]||ship, shipThird=cp[2]||ship, handles=fanHandles[state.me]||fanHandles.Anton;
- const postTexts=[
-  `什么啊，今天他俩又一起下班`,
-  `好幸福....我好爱我家${shipAlt}，天天粘在一起`,
-  `我操我家${ship}谈了吧？？同款衣服同款首饰。。`,
-  `拆家姐能不能滚蛋😂`,
-  `吗呀大姐，他们都是直男好吗你们群这人失心疯了吧`,
-  `我发现一个细节。。最近他俩好奇怪，机场图里感觉好像情侣装啊。`,
-  `能不能别啥都往恋爱上扯，cp磕磕得了真以为他们喜欢男的啊？？`,
-  `我没法不尖叫啊，${ship}好配。。`,
-  `我态度还是${shipAlt}不分手我就不脱粉，我必须活到${shipAlt}官宣的那一天`,
-  `别自导自演了大姐🙄我家哥哥喜欢女人`,
-  `我有一个暴论：他俩绝壁谈了`,
-  `纯路人，这么多细节明眼人一看就知道在谈恋爱好不`,
-  `我就不信你们cp粉有不歪屁股的`,
-  `别的不说今天的舞台真的好帅。。。。`,
-  `滚滚滚 我哥哥每天忙得要死泡泡都不来还谈恋爱`,
-  `他怎么还不来泡泡我真的要电死他`
+ const tabs=['为你推荐','正在关注','添加＋','棒球'];
+ const member=cn[names.indexOf(state.me)]||state.me||'RIIZE成员';
+ const stage=Math.min(6,Math.max(0,Number(state.chapter)||0));
+ const phases=[
+  {name:'剧情1 · 秘密暧昧',sub:'日常时间线',heat:'低热度',posts:[
+   ['softcloudjpg','今天舞台状态也太好了吧，ending妖精真的绝了。','2小时','36','218','1,204'],
+   ['bluehour__17','下班路透好像看到他和成员一起走，普通团体行程而已吧。','3小时','18','96','680'],
+   ['peachfilm_','最近每天都在等更新ㅠㅠ 今天也辛苦了。','4小时','12','143','902'],
+   ['moodboard_021','有人知道这周公开行程是什么吗？想去支持一下。','5小时','9','71','430'],
+   ['daily_moment7','感觉最近大家都很忙，希望都能好好休息。','6小时','7','54','321']
+  ],hot:['RIIZE 今日舞台','成员个人直拍','RIIZE 行程讨论']},
+  {name:'剧情2 · CP 讨论增加',sub:'互动细节被反复讨论',heat:'讨论升温',posts:[
+   ['orbitandtea','最近这两个人互动是不是变多了？我先声明只是随便问问。','1小时','83','612','4,820'],
+   ['filmgrainclub','同款外套又出现了……当然也可能是造型师统一安排。','2小时','126','980','8,103'],
+   ['littlewave_03','CP粉能不能先冷静一点，正常互动也要被逐帧分析吗。','2小时','54','407','3,116'],
+   ['afterglow_note','今天的照片里配饰好像有点像？有没有人整理过时间线？','3小时','91','730','6,420'],
+   ['warmtone_pic','嗑CP归嗑CP，不要把猜测当成事实，更不要去打扰本人。','4小时','42','389','2,807']
+  ],hot:['成员互动讨论','同款穿搭对比','RIIZE CP 话题']},
+  {name:'剧情3 · 陌生私信与猜测',sub:'有人开始猜测圈外恋情',heat:'出现质疑',posts:[
+   ['novemberfilm','如果真的有对象，应该也是圈外人吧？最近感觉他状态有点不一样。','1小时','173','1,420','1.2万'],
+   ['quietly_here','拜托不要去扒普通人的账号，喜欢艺人也要有边界。','1小时','108','932','8,410'],
+   ['honeytoast_02','有没有人也收到奇怪的投稿？说他最近好像总在看手机。','2小时','95','701','6,290'],
+   ['softfocus_daily','没有实锤就别造谣，几张照片不能证明任何关系。','3小时','62','488','4,106'],
+   ['rainyroomjpg','我只希望不要牵扯无关的普通人，别把猜测变成网暴。','4小时','87','760','5,830']
+  ],hot:['疑似圈外恋情','粉丝投稿讨论','请勿打扰素人']},
+  {name:'剧情4 · 站姐开始调查',sub:'持续私信与线索收集',heat:'调查扩散',posts:[
+   ['archive_031','整理了最近几次公开行程的时间点，发现有几个巧合值得注意。','38分钟','284','2,310','2.1万'],
+   ['lens_on_stage','作为拍摄者只分享公开场合照片，大家不要私下跟车或蹲点。','1小时','116','840','7,600'],
+   ['mondayarchive','有人说看到他上车前回了消息，但这真的能说明什么吗？','2小时','198','1,720','1.6万'],
+   ['peachfilm_','站姐如果有证据请不要曝光普通人的个人信息，拜托了。','3小时','137','1,030','9,420'],
+   ['tinyplanet_8','越查越像在拼图，但拼出来的也未必是真相。','4小时','102','790','7,310']
+  ],hot:['站姐时间线整理','公开行程照片','保护普通人隐私']},
+  {name:'剧情5 · 热搜与粉圈分裂',sub:'不同立场公开争论',heat:'高热度',posts:[
+   ['trendwatch_kr','话题讨论量突然上升了。提醒：目前流传内容均未得到证实。','12分钟','1,204','8,930','12.8万'],
+   ['only_for_riize','如果是真的我会难过，但也不接受去攻击一个素人。','25分钟','820','5,620','8.1万'],
+   ['cp_archive_','从一开始就说有迹象的人现在很激动，但请别骚扰任何人。','31分钟','692','4,810','6.7万'],
+   ['justpassingby','路人觉得最离谱的是大家已经开始互相审判了。','42分钟','510','3,920','5.2万'],
+   ['staywith_rz','不管站哪边，都别把未经证实的传闻当成官方消息。','1小时','438','3,180','4.6万']
+  ],hot:['RIIZE 恋情猜测','粉圈立场争论','相关话题持续上升']},
+  {name:'剧情6 · 关系危机',sub:'舆论压力影响现实关系',heat:'持续发酵',posts:[
+   ['bluehourrecord','今天活动现场气氛有点微妙，希望大家把注意力放回舞台。','18分钟','356','2,840','3.9万'],
+   ['ordinaryorbit','看到有人说成员最近压力很大。无论如何希望他能好好休息。','34分钟','281','2,010','2.8万'],
+   ['mellowdays_','粉丝吵得越凶，当事人承受的压力可能越大。','48分钟','194','1,480','2.1万'],
+   ['softspoken_','不想再看所谓的“实锤合集”了，很多内容都只是推测。','1小时','173','1,220','1.7万'],
+   ['silverhour_','希望他身边的人也能被好好保护，不要让无关的人受伤。','2小时','141','980','1.3万']
+  ],hot:['成员近期状态','舆论压力讨论','停止传播未经证实内容']},
+  {name:'剧情7 · 最终决定',sub:'结局由你的选择决定',heat:'结局阶段',posts:[
+   ['dear_morning','这几天的讨论终于慢慢降下来了，希望大家都能回归自己的生活。','20分钟','92','710','9,800'],
+   ['warmmilk_17','无论最后是什么结果，都希望当事人能拥有选择自己生活的空间。','45分钟','121','930','1.2万'],
+   ['quietmoon_13','不公开回应也不代表默认，大家还是留一点空间吧。','1小时','84','602','8,100'],
+   ['starlitpost','今天只想认真看舞台。其他事情交给当事人自己决定。','2小时','65','480','6,300'],
+   ['slowlywithu','有些答案不需要由粉丝替他们说出来。','3小时','48','390','4,900']
+  ],hot:['后续走向待定','尊重当事人选择','回归舞台与日常']}
  ];
- const counts=[['94','400','3731'],['32','286','1920'],['218','1300','2.4万'],['81','602','3910'],['45','390','2100'],['176','980','1.8万'],['63','520','4600'],['129','1100','1.2万'],['301','2800','3.6万'],['92','710','5200'],['188','1700','2.1万'],['57','480','3900'],['38','301','2700'],['73','850','6800'],['104','920','7600'],['26','210','1800']];
- const avatars=['C','♡','R','M','S','A','T','♡','Z','N','D','L','P','V','H','B'];
+ const phase=phases[stage];
+ const postMarkup=phase.posts.map((p,i)=>`<div class="x-feed-post">
+  <div class="x-feed-avatar" style="background:${['#71889a','#b18d80','#8b91a6','#a18b9d','#7b968b'][i%5]}">${['C','♡','R','M','S'][i]}</div>
+  <div class="x-feed-content">
+   <div class="x-feed-meta"><b>@${p[0]}</b> · ${p[2]} <span style="float:right;color:#1d9bf0">𝕏</span></div>
+   <div class="x-feed-text" onclick="xOpenPost(${i})" style="cursor:pointer">${esc(p[1])}</div>
+   ${stage===3&&i===0?`<div class="storycard" style="margin:9px 0;padding:10px"><b>时间线整理 · 仅为剧情线索</b><p>公开行程 A → 相似配饰 → 时间点巧合<br>尚无能够证实恋情的可靠证据。</p></div>`:''}
+   ${stage===4&&i===0?`<div class="storycard" style="margin:9px 0;padding:10px"><b>实时话题趋势</b><p>#RIIZE恋情猜测　#尊重私人生活　#停止传播未经证实内容</p></div>`:''}
+   <div class="x-actions"><button onclick="xReact(this,'reply',${i})"><span class="glyph">◯</span></button><button onclick="xReact(this,'repost')"><span class="glyph">⇄</span>${p[3]}</button><button onclick="xReact(this,'like')"><span class="glyph">♡</span>${p[4]}</button><button><span class="glyph">▥</span>${p[5]}</button><button onclick="xReact(this,'bookmark')"><span class="glyph">♧</span></button><button><span class="glyph">↥</span></button></div>
+  </div></div>`).join('');
  shell('xscreen',`
  <div class="x-topline"><div class="x-userpic">♡</div><div class="x-logo">𝕏</div><div class="x-spacer"></div></div>
  <div class="x-tabs">${tabs.map(t=>`<button class="${xActiveTab===t?'active':''}" onclick="xTab('${t}')">${t}</button>`).join('')}</div>
  <div class="x-feed">
- ${postTexts.map((txt,i)=>`<div class="x-feed-post">
- <div class="x-feed-avatar" style="background:${['#71889a','#b18d80','#8b91a6','#a18b9d','#7b968b'][i%5]}">${avatars[i]}</div>
- <div class="x-feed-content">
- <div class="x-feed-meta"><b>@${handles[i]}</b> · ${i===0?'6小时':i<5?'5小时':i<10?'4小时':'3小时'} <span style="float:right;color:#1d9bf0">𝕏</span></div>
- <div class="x-feed-text">${i===7?`<span class="tag">#${ship}</span> `:i===8?`<span class="tag">#${shipAlt}</span> `:''}${esc(txt)}</div>
- ${i===0?`<div class="x-media-grid"><div class="x-media-photo tall">下班路透 · 粉丝偶遇视角</div><div class="x-media-stack"><div class="x-media-photo">机场同框 · 细节 01</div><div class="x-media-photo">同款穿搭 · 细节 02</div></div></div>`:''}
- ${i===2?`<div class="x-media-grid"><div class="x-media-photo tall">同款外套</div><div class="x-media-stack"><div class="x-media-photo">相似配饰</div><div class="x-media-photo">机场照片对比</div></div></div>`:''}
- <div class="x-actions"><button onclick="xReact(this,'reply')"><span class="glyph">◯</span></button><button onclick="xReact(this,'repost')"><span class="glyph">⇄</span>${counts[i][0]}</button><button onclick="xReact(this,'like')"><span class="glyph">♡</span>${counts[i][1]}</button><button><span class="glyph">▥</span>${counts[i][2]}</button><button onclick="xReact(this,'bookmark')"><span class="glyph">♧</span></button><button><span class="glyph">↥</span></button></div>
- </div></div>`).join('')}
- <div class="storycard"><b>讨论热度 · 虚构剧情</b><div class="meter"><i style="width:${Math.min(100,state.suspicion)}%"></i></div><p>当前讨论对象：${cn[names.indexOf(state.me)]} × ${cn[names.indexOf(state.lover)]}。本时间线为互动故事中的虚构社交内容。</p></div>
+  <div class="storycard" style="margin:10px 12px 8px"><div style="display:flex;justify-content:space-between;align-items:center"><b>${phase.name}</b><span style="font-size:11px;color:#777">${phase.heat}</span></div><p style="margin:6px 0 0;color:#777;font-size:12px">${phase.sub} · 关于 @${member} 的粉圈动态</p><div class="meter"><i style="width:${Math.min(100,stage===0?8:Math.max(state.suspicion,stage*13))}%"></i></div></div>
+  ${postMarkup}
+  <div class="storycard" style="margin:10px 12px"><b>趋势话题</b>${phase.hot.map((h,i)=>`<div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #eee;font-size:12px"><span>${i+1}　#${h}</span><small style="color:#888">${['热度上升','正在讨论','持续关注'][i]}</small></div>`).join('')}<p style="font-size:10px;color:#999;margin-bottom:0">以上均为互动故事中的虚构动态，不代表真实事件。</p></div>
+  <div class="storycard" style="margin:10px 12px"><b>当前舆论状态</b><p>怀疑值：${state.suspicion}/100　·　粉圈热度：${state.public}/100</p><p style="font-size:11px;color:#888">粉丝目前只是在猜测成员是否有圈外恋情，并不知道玩家的真实身份。</p></div>
  </div>
  <button class="x-compose-fab" onclick="xCompose()">＋</button>
  <div class="x-bottom"><button class="active" onclick="xTab('为你推荐')">◆</button><button onclick="xTab('正在关注')">⌕</button><button onclick="xTab('添加＋')">◉</button><button onclick="xTab('通知')">♧</button><button onclick="xTab('私信')">◯</button></div>`);
 }
-window.xTab=t=>{xActiveTab=t;if(t==='正在关注'||t==='为你推荐'){xscreen();return}showModal(t, t==='添加＋'?'这里会显示你可能感兴趣的账号与话题。':t==='私信'?'X 私信暂时没有新消息。':'暂时没有新的通知。',[{t:'返回时间线',f:()=>{xActiveTab='为你推荐';xscreen()}}])};
-window.xReact=(el,type)=>{if(type==='like'){el.classList.toggle('liked');let g=el.querySelector('.glyph');g.textContent=el.classList.contains('liked')?'♥':'♡'}else if(type==='repost'){showModal('转发','已将这条虚构动态加入你的转发记录。',[{t:'好的',f:()=>{}}])}else if(type==='bookmark'){showModal('已收藏','这条动态已保存到书签。',[{t:'好的',f:()=>{}}])}else{showModal('回复','你可以先观察讨论，不必急着回应。',[{t:'知道了',f:()=>{}}])}};
-window.xCompose=()=>showModal('发布动态',`关于${currentCpName()}的讨论越来越多。你想公开回应吗？公开发言可能让更多人注意到你。`,[{t:'暂时不发',f:()=>{}},{t:'查看 Instagram 小号',f:()=>go('ig')},{t:'查看站姐私信',f:()=>go('dm')},{t:'继续下一阶段',f:()=>nextChapter()}]);
+window.xOpenPost=i=>{
+ const phaseNames=['日常讨论','CP 互动讨论','圈外恋情猜测','站姐线索整理','热搜与粉圈争论','舆论压力','最终走向'];
+ const replies=[
+  ['今天舞台真的很棒！','先专注作品吧，别过度解读。','期待下一次更新。'],
+  ['同款也可能只是巧合吧。','CP粉开心一下可以，别上升真人。','最近互动确实挺多的。'],
+  ['如果是圈外人就更应该保护隐私。','没有证据不要乱猜。','我只希望不要去扒普通人的账号。'],
+  ['公开照片可以讨论，私人行程不要跟。','整理时间线不等于有实锤。','拜托不要曝光无关人员。'],
+  ['各家都冷静一点吧。','喜欢他就尊重他的私人生活。','传闻还没证实，不要互相攻击。'],
+  ['希望他能好好休息。','粉丝争吵只会让事情更糟。','不要把压力转嫁给无关的人。'],
+  ['最后还是让当事人自己决定吧。','希望大家都能平静下来。','回归舞台吧。']
+ ];
+ const s=Math.min(6,Math.max(0,Number(state.chapter)||0));
+ showModal(phaseNames[s]+' · 评论区',replies[s].map((v,j)=>'@'+['mood_note','bluehour_17','daily_cloud'][j]+'：'+v).join('\n\n'),[{t:'返回时间线',f:()=>xscreen()}]);
+};
+window.xTab=t=>{xActiveTab=t;if(t==='正在关注'||t==='为你推荐'){xscreen();return}showModal(t,t==='添加＋'?'这里会显示你可能感兴趣的账号与话题。':t==='私信'?'X 私信暂时没有新消息。':'暂时没有新的通知。',[{t:'返回时间线',f:()=>{xActiveTab='为你推荐';xscreen()}}])};
+window.xReact=(el,type)=>{if(type==='like'){el.classList.toggle('liked');let g=el.querySelector('.glyph');g.textContent=el.classList.contains('liked')?'♥':'♡'}else if(type==='repost'){showModal('转发','已将这条虚构动态加入你的转发记录。',[{t:'好的',f:()=>{}}])}else if(type==='bookmark'){showModal('已收藏','这条动态已保存到书签。',[{t:'好的',f:()=>{}}])}else{showModal('回复','可以打开评论区看看不同粉丝的立场。',[{t:'查看评论',f:()=>xOpenPost(0)},{t:'先不回复',f:()=>{}}])}};
+window.xCompose=()=>showModal('发布动态',`你正在以 @${igUsername()} 的视角浏览粉圈。公开发言可能引起更多关注，你想怎么做？`,[{t:'暂时保持沉默',f:()=>{}},{t:'查看 Instagram 私信',f:()=>go('ig')},{t:'查看站姐私信',f:()=>go('dm')},{t:'继续下一阶段',f:()=>nextChapter()}]);
+
 let igView='feed';
 let igLiked={};
 function igUsername(){
