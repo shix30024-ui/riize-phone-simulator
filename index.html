@@ -265,7 +265,7 @@ window.startStory=()=>{
  state.screen='home';state.chapter=0;save();render()
 };
 function home(){shell('home',`<div class="scroll home"><div style="display:flex;justify-content:space-between;font-size:12px;color:#655d62"><b>MONDAY, 09:41</b><span>♡ 你的私人手机</span></div><div class="widget"><small>오늘의 날씨 · SEOUL</small><div class="time">09:41</div><div style="display:flex;justify-content:space-between"><span>多云转晴　☁</span><small>今天也要小心一点。</small></div></div><div class="appgrid">
-${[['🗨️','KKT','line'],['𝕏','X','x'],['◎','Instagram','ig'],['📷','相册','photos'],['📅','日程','schedule'],['📝','备忘录','notes'],['📩','陌生私信','dm'],['💬','LYSN','lysn'],['♡','关系状态','status']].map(a=>`<button class="appcell" onclick="go('${a[2]}')"><div class="appicon">${a[0]}</div><span>${a[1]}</span></button>`).join('')}
+${[['🗨️','KKT','line'],['𝕏','X','x'],['◎','Instagram','ig'],['📷','相册','photos'],['📅','日程','schedule'],['📝','备忘录','notes'],['📩','陌生私信','dm'],['💬','LYSN','lysn'],['🧵','Threads','threads'],['♡','关系状态','status']].map(a=>`<button class="appcell" onclick="go('${a[2]}')"><div class="appicon">${a[0]}</div><span>${a[1]}</span></button>`).join('')}
 </div><div class="home-title">TODAY'S NOTE</div><div class="storycard"><b>今天的行程</b><p>10:30 团体练习　/　14:00 拍摄　/　晚上：自由时间<br>经纪人提醒：最近上下班尽量不要单独行动。</p></div><div class="dock"><button class="appcell" onclick="go('line')"><div class="appicon" style="background:#ffe500;color:#241f00">🗨</div></button><button class="appcell" onclick="go('x')"><div class="appicon">𝕏</div></button><button class="appcell" onclick="go('ig')"><div class="appicon">◎</div></button><button class="appcell" onclick="go('dm')"><div class="appicon">📩</div></button></div></div>`)}
 function kktNav(active){return `<div class="kkt-bottom">
  <button class="${active==='friends'?'active':''}" onclick="go('line')"><strong>♙</strong>好友</button>
@@ -577,7 +577,7 @@ function showModal(title,body,buttons){let old=$('.modalback');if(old)old.remove
 function clamp(x){return Math.max(0,Math.min(100,x))}
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 window.restart=()=>{localStorage.removeItem('riize_crisis_save');state={screen:'setup',me:'',lover:'',nickname:'',birthday:'',igHandle:'',profileReady:false,chapter:0,trust:50,suspicion:12,public:18,choices:[],dm:0,igPosts:0,ending:''};render()};
-function render(){switch(state.screen){case'intro':intro();break;case'setup':setup();break;case'home':home();break;case'line':line();break;case'kktChats':kktChats();break;case'kktCalls':kktCalls();break;case'kktMore':kktMore();break;case'loverchat':loverchat();break;case'lysn':lysn();break;case'videoCall':videoCall();break;case'x':xscreen();break;case'ig':ig();break;case'dm':dm();break;case'openDM':openDM();break;case'photos':photos();break;case'schedule':schedule();break;case'notes':notes();break;case'status':status();break;default:home()}}
+function render(){switch(state.screen){case'intro':intro();break;case'setup':setup();break;case'home':home();break;case'line':line();break;case'kktChats':kktChats();break;case'kktCalls':kktCalls();break;case'kktMore':kktMore();break;case'loverchat':loverchat();break;case'lysn':lysn();break;case'threads':threadsScreen();break;case'videoCall':videoCall();break;case'x':xscreen();break;case'ig':ig();break;case'dm':dm();break;case'openDM':openDM();break;case'photos':photos();break;case'schedule':schedule();break;case'notes':notes();break;case'status':status();break;default:home()}}
 
 /* === Story-driven IG / KKT / LYSN sequence === */
 function ig(){
@@ -644,6 +644,29 @@ window.lysnReveal=function(){
  state.chapter=2;state.suspicion=clamp(state.suspicion+14);state.public=clamp(state.public+9);state.choices.push('LYSN照片线索');save();
  showModal('粉丝开始截图分析','LYSN 的照片被粉丝保存。有人发现照片里的小物件和你的 IG 动态很相似。截图开始在粉丝群里流传。',[{t:'去 Instagram 查看陌生私信',f:function(){igView='inbox';go('ig')}},{t:'稍后再看',f:function(){go('home')}}]);
 };
+
+function threadsScreen(){
+ if((Number(state.chapter)||0)<1){showModal('Threads 还很平静','先在 X 上点开那条关于他最近总看手机的帖子。',[{t:'去 X',f:function(){go('x')}}]);return}
+ const member=cn[names.indexOf(state.lover)]||'他';
+ const posts=[
+ ['daily_rz','有没有人觉得'+member+'最近状态特别好？整个人看起来都亮亮的。','没有吧，他最近练习很认真啊。','状态好不是好事吗？'],
+ ['moodboard_kr','他最近是不是经常穿同一件外套？机场图和练习室图里好像都是那件。','同款外套而已吧。','某些人是不是疑心病……'],
+ ['bluehour_021','你们有没有发现他最近总是在看手机ㅋㅋ每次镜头扫过去都在低头。','可能只是看行程吧。','别把正常行为都当线索。'],
+ ['airport_archive','他最近怎么不和队友一辆车啊？有几次都是分开走的。','行程安排不同很正常。','没有证据不要乱猜。']
+ ];
+ shell('threads-screen','<div class="x-topline"><div class="x-userpic">♡</div><div class="x-logo" style="font-size:22px">Threads</div><div class="x-spacer"></div></div><div class="storycard" style="margin:10px 12px"><b>剧情2 · Threads 热门讨论</b><p>关于 '+member+' 的讨论突然变多。点开帖子查看不同立场的评论。</p></div><div class="scroll">'+posts.map(function(p,i){return '<article class="x-feed-post" style="padding:14px;border-bottom:1px solid #eee"><div class="x-feed-meta"><b>@'+p[0]+'</b> · '+(i+1)+'小时前</div><div class="x-feed-text" style="margin:9px 0">'+p[1]+'</div><button class="choice" onclick="threadsComments('+i+')">查看评论 · '+(120+i*73)+'</button></article>'}).join('')+'</div><div style="padding:10px"><button class="btn-dark" style="width:100%" onclick="go(\'loverchat\')">去 KKT 告诉男朋友</button></div>');
+}
+window.threadsComments=function(i){
+ const member=cn[names.indexOf(state.lover)]||'他';
+ const sets=[
+ ['没有吧，他最近练习很认真啊。','某些人是不是疑心病。。','状态好不是好事吗？状态好能把你们克死是不是。'],
+ ['可能造型师觉得好看吧ㅋㅋ','同一件外套也能分析半天？','但他最近真的经常穿。'],
+ ['他可能在看工作消息啊。','镜头扫到就截图分析有点夸张了。','我也注意到了，不过不代表什么。'],
+ ['每次行程不一样很正常。','你们是不是把所有事情都联系起来了？','别跟车，也别去打听私人行程。']
+ ];
+ showModal('Threads 评论区 · '+member,sets[i].map(function(x,j){return '@'+['blue_sky','daily_fan','justwatching'][j]+'：'+x}).join('\n\n'),[{t:'返回帖子',f:function(){threadsScreen()}},{t:'去 KKT',f:function(){go('loverchat')}}]);
+};
+
 function seedStoryRequests(){if((Number(state.chapter)||0)<2)return;const m=cn[names.indexOf(state.lover)]||'他';igRequestItems.splice(0,igRequestItems.length,['film210','姐姐，你认识 RIIZE 的'+m+'吗？',3],['plum_mint_98','你的东西和'+m+'是同款。你是他女朋友吗？',4],['after_silver_56','我这里拍到了一些东西，你立即回复我。',2],['peach_92','不要和他买同款了！',3],['quiet_haneul_6','姐姐你和 RIIZE 的'+m+'在谈恋爱吗？',4],['cocoa_dream921','嫂子？？？',2],['peach_orbit_56','我擦等一下，你是'+m+'的🧹吗？？纳尼',3],['bluehour_0321','妈的你能不能别再蹭了，以为自己是嫂子啊？我老公不可能和你在一起的别做梦了大姐。',5]);}
 function igInbox(){
  seedStoryRequests();
