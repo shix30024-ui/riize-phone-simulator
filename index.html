@@ -232,30 +232,38 @@ const fanHandles = {
 
 const $=s=>document.querySelector(s);
 const app=$('#app');
-let state={screen:'intro',me:'',lover:'',nickname:'',chapter:0,trust:50,suspicion:12,public:18,choices:[],dm:0,igPosts:0,ending:''};
+let state={screen:'intro',me:'',lover:'',nickname:'',birthday:'',igHandle:'',profileReady:false,chapter:0,trust:50,suspicion:12,public:18,choices:[],dm:0,igPosts:0,ending:''};
 const save=()=>{try{localStorage.setItem('riize_crisis_save',JSON.stringify(state))}catch(e){}};
-const load=()=>{try{let x=JSON.parse(localStorage.getItem('riize_crisis_save'));if(x&&x.me)state=x}catch(e){}};
+const load=()=>{try{let x=JSON.parse(localStorage.getItem('riize_crisis_save'));if(x&&x.profileReady&&x.me)state={...state,...x}}catch(e){}};
 function shell(cls,html){app.className='screen '+(cls||'');app.innerHTML=html}
 function top(title,back='home'){return `<div class="top"><button onclick="go('${back}')">‹ 返回</button><b>${title}</b><span style="width:42px"></span></div>`}
 window.go=(s)=>{state.screen=s;render()};
 window.exitToHome=()=>{if(state.me&&state.lover){state.screen='home';render()}else{state.screen='intro';render()}};
-function intro(){shell('intro',`<div class="eyebrow">A FICTIONAL RIIZE FAN SIMULATOR</div><div><h1>恋爱危机，<br>从一张照片开始。</h1><p>你是 RIIZE 的其中一位成员。你们把恋爱藏在日常细节里——同款衣服、下班后的同行、只有彼此看得懂的照片。</p><p>直到某天，粉丝开始察觉不对劲。站姐的小号也向你发来了私信。</p><p>你的每个选择，都会改变恋情、粉圈舆论与故事结局。</p></div><button class="btn-dark" onclick="go('setup')">开始故事　→</button><div class="eyebrow">ALL CHARACTERS ARE USED IN A FICTIONAL FAN STORY</div>`)}
+function intro(){shell('intro',`<div class="eyebrow">A FICTIONAL RIIZE FAN SIMULATOR</div><div><h1>恋爱危机，<br>从一张照片开始。</h1><p>你是一位普通的圈外女生，和 RIIZE 的一位成员秘密恋爱。</p><p>在外人眼里，你们生活在不同的世界；只有你们知道，那些日常消息、偷偷见面的时间和照片里的小细节，都是属于彼此的秘密。</p><p>从今天开始，你的每个选择，都可能改变这段恋情的走向。</p></div><button class="btn-dark" onclick="go('setup')">创建我的故事　→</button><div class="eyebrow">ALL CHARACTERS ARE USED IN A FICTIONAL FAN STORY</div>`)}
 function setup(){
- const partners=state.me?(allowedPartners[state.me]||[]):[];
  shell('setup',`<div class="brand">우리 사이 <span class="muted" style="font-size:12px">· RIIZE</span></div>
- <p class="sub">先决定你是谁，以及你想和谁展开这条故事线。</p>
- <div class="section">01 / 选择你的成员身份</div>
+ <p class="sub">先选择你的恋人，再创建属于你的个人资料。</p>
+ <div class="section">01 / 选择你的 RIIZE 男朋友</div>
  <div class="members">${names.map((n,i)=>`<button class="member ${state.me===n?'active':''}" onclick="pickMe('${n}')"><strong>${cn[i]}</strong><small>${n}</small></button>`).join('')}</div>
- <div class="section">02 / 选择恋爱对象</div>
- <div class="love-grid">${partners.length?partners.map(n=>{let i=names.indexOf(n);return `<button class="love ${state.lover===n?'active':''}" onclick="pickLover('${n}')">${cn[i]} <span class="muted">· ${n}</span></button>`}).join(''):'<p class="hint">请先选择你的成员身份。</p>'}</div>
- <div class="section">03 / 你的称呼（可选）</div>
- <input class="field" id="nickname" placeholder="例如：我的小号昵称" value="${esc(state.nickname)}">
- <p class="hint">恋爱对象会根据你选择的成员自动筛选。X 上的 CP 名称和粉丝账号也会同步变化。</p>
- <button class="btn-dark" onclick="startStory()">确认设定，进入手机　→</button>`);
+ <div class="section">02 / 创建你的个人资料</div>
+ <input class="field" id="nickname" placeholder="你的姓名 / 昵称" value="${esc(state.nickname)}">
+ <input class="field" id="birthday" type="date" aria-label="生日" value="${esc(state.birthday||'')}">
+ <input class="field" id="igHandle" placeholder="你的 Instagram 用户名（例如：yourname_）" value="${esc(state.igHandle||'')}">
+ <p class="hint">你是圈外人，不属于 RIIZE。资料会用于模拟器中的个人主页、私信和恋爱剧情。</p>
+ <button class="btn-dark" onclick="startStory()">确认资料，进入手机　→</button>`);
 }
-window.pickMe=n=>{state.me=n;if(state.lover===n)state.lover='';setup()};
-window.pickLover=n=>{state.lover=n;setup()};
-window.startStory=()=>{state.nickname=$('#nickname').value.trim()||'private';if(!state.me||!state.lover){alert('请先选择成员身份和恋爱对象。');return}state.screen='home';state.chapter=0;save();render()};
+window.pickMe=n=>{state.me=n;state.lover=n;setup()};
+window.startStory=()=>{
+ const name=$('#nickname').value.trim();
+ const birthday=$('#birthday').value;
+ const ig=$('#igHandle').value.trim().replace(/^@/,'');
+ if(!state.me){alert('请先选择一位 RIIZE 成员作为你的男朋友。');return}
+ if(!name){alert('请输入你的姓名或昵称。');return}
+ if(!birthday){alert('请选择你的生日。');return}
+ if(!ig){alert('请输入你的 Instagram 用户名。');return}
+ state.nickname=name;state.birthday=birthday;state.igHandle=ig;state.lover=state.me;state.profileReady=true;
+ state.screen='home';state.chapter=0;save();render()
+};
 function home(){shell('home',`<div class="scroll home"><div style="display:flex;justify-content:space-between;font-size:12px;color:#655d62"><b>MONDAY, 09:41</b><span>♡ 你的私人手机</span></div><div class="widget"><small>오늘의 날씨 · SEOUL</small><div class="time">09:41</div><div style="display:flex;justify-content:space-between"><span>多云转晴　☁</span><small>今天也要小心一点。</small></div></div><div class="appgrid">
 ${[['🗨️','KKT','line'],['𝕏','X','x'],['◎','Instagram','ig'],['📷','相册','photos'],['📅','日程','schedule'],['📝','备忘录','notes'],['📩','陌生私信','dm'],['♡','关系状态','status']].map(a=>`<button class="appcell" onclick="go('${a[2]}')"><div class="appicon">${a[0]}</div><span>${a[1]}</span></button>`).join('')}
 </div><div class="home-title">TODAY'S NOTE</div><div class="storycard"><b>今天的行程</b><p>10:30 团体练习　/　14:00 拍摄　/　晚上：自由时间<br>经纪人提醒：最近上下班尽量不要单独行动。</p></div><div class="dock"><button class="appcell" onclick="go('line')"><div class="appicon" style="background:#ffe500;color:#241f00">🗨</div></button><button class="appcell" onclick="go('x')"><div class="appicon">𝕏</div></button><button class="appcell" onclick="go('ig')"><div class="appicon">◎</div></button><button class="appcell" onclick="go('dm')"><div class="appicon">📩</div></button></div></div>`)}
@@ -339,6 +347,7 @@ window.xCompose=()=>showModal('发布动态',`关于${currentCpName()}的讨论�
 let igView='feed';
 let igLiked={};
 function igUsername(){
+ if(state.igHandle&&state.igHandle.trim()) return state.igHandle.trim().replace(/\s+/g,'_').replace(/^@/,'');
  if(state.nickname&&state.nickname.trim()) return state.nickname.trim().replace(/\s+/g,'_').replace(/^@/,'');
  const map={Anton:'anton_s7s',Sungchan:'sungchan13',Wonbin:'wonbin.zip',Shotaro:'shotaro_taro',Sohee:'soheehee',Eunseok:'eunseok_00'};
  return map[state.me]||'irene_s7s';
