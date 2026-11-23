@@ -232,7 +232,7 @@ const fanHandles = {
 
 const $=s=>document.querySelector(s);
 const app=$('#app');
-let state={screen:'intro',me:'',lover:'',nickname:'',birthday:'',igHandle:'',profileReady:false,chapter:0,trust:50,suspicion:12,public:18,choices:[],dm:0,igPosts:0,ending:''};
+let state={screen:'setup',me:'',lover:'',nickname:'',birthday:'',igHandle:'',profileReady:false,chapter:0,trust:50,suspicion:12,public:18,choices:[],dm:0,igPosts:0,ending:''};
 const save=()=>{try{localStorage.setItem('riize_crisis_save',JSON.stringify(state))}catch(e){}};
 const load=()=>{try{let x=JSON.parse(localStorage.getItem('riize_crisis_save'));if(x&&x.profileReady&&x.me)state={...state,...x}}catch(e){}};
 function shell(cls,html){app.className='screen '+(cls||'');app.innerHTML=html}
@@ -506,8 +506,8 @@ function ending(){let title,desc;if(state.trust>=58&&state.suspicion<45){title='
 function showModal(title,body,buttons){let old=$('.modalback');if(old)old.remove();let el=document.createElement('div');el.className='modalback';el.innerHTML=`<div class="modal"><h3>${title}</h3><p>${body}</p>${buttons.map((b,i)=>`<button class="${i===0?'btn-dark':'btn-light'}" data-i="${i}">${b.t}</button>`).join('')}</div>`;el.querySelectorAll('button').forEach(b=>b.onclick=()=>{let i=+b.dataset.i;el.remove();buttons[i].f()});app.appendChild(el)}
 function clamp(x){return Math.max(0,Math.min(100,x))}
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-window.restart=()=>{localStorage.removeItem('riize_crisis_save');state={screen:'setup',me:'',lover:'',nickname:'',chapter:0,trust:50,suspicion:12,public:18,choices:[],dm:0,igPosts:0,ending:''};render()};
+window.restart=()=>{localStorage.removeItem('riize_crisis_save');state={screen:'setup',me:'',lover:'',nickname:'',birthday:'',igHandle:'',profileReady:false,chapter:0,trust:50,suspicion:12,public:18,choices:[],dm:0,igPosts:0,ending:''};render()};
 function render(){switch(state.screen){case'intro':intro();break;case'setup':setup();break;case'home':home();break;case'line':line();break;case'kktChats':kktChats();break;case'kktCalls':kktCalls();break;case'kktMore':kktMore();break;case'loverchat':loverchat();break;case'x':xscreen();break;case'ig':ig();break;case'dm':dm();break;case'openDM':openDM();break;case'photos':photos();break;case'schedule':schedule();break;case'notes':notes();break;case'status':status();break;default:home()}}
-load();if(state.me&&state.lover&&state.screen!=='intro'&&state.screen!=='setup'){}else state.screen='intro';render();
+load();if(state.me&&state.lover&&state.profileReady&&state.screen!=='intro'&&state.screen!=='setup'){}else state.screen='setup';render();
 })();
 </script></body></html>
