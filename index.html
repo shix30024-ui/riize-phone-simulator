@@ -614,7 +614,7 @@ function kktStoryChat(){
  shell('kkt-chat-screen',html);
 }
 window.kktQuick=function(i){
- const stage=Number(state.chapter)||0,opts=stage===0?['我也好想你。','你今天辛苦啦，什么时候能见面？','谁让你每次都躲着我ㅋㅋ']:stage===1?['你的粉丝最近有好多猜测啊宝宝','我们不会被发现吧？','被发现可怎么办啊']:['我有点害怕，我们先不要见面了。','他们已经开始怀疑我们了。','我不想再一直躲躲藏藏了。','你会不会觉得我给你添麻烦了？'];
+ const stage=Number(state.chapter)||0,opts=stage===0?['我也好想你。','你今天辛苦啦，什么时候能见面？','谁让你每次都躲着我ㅋㅋ']:stage===1?(state.kktFirstSetDone?['我不想一直躲着你。','好想你啊。']:['你的粉丝最近有好多猜测啊宝宝','我们不会被发现吧？','被发现可怎么办啊']):['我有点害怕，我们先不要见面了。','他们已经开始怀疑我们了。','我不想再一直躲躲藏藏了。','你会不会觉得我给你添麻烦了？'];
  const msg=opts[i];if(!msg)return;
  state.kktMessages=state.kktMessages||[];state.kktMessages.push({from:'me',text:msg});
  if(stage===0){state.trust=clamp(state.trust+(i===0?7:4));state.kktMessages.push({from:'him',text:i===0?'我就知道宝宝也想我ㅋㅋ':'我看看这周的时间，想办法见你。'});}
