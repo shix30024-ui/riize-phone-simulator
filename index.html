@@ -232,7 +232,7 @@ const fanHandles = {
 
 const $=s=>document.querySelector(s);
 const app=$('#app');
-let state={screen:'setup',me:'',lover:'',nickname:'',birthday:'',igHandle:'',profileReady:false,chapter:0,trust:50,suspicion:12,public:18,choices:[],dm:0,igPosts:0,ending:''};
+let state={screen:'setup',me:'',lover:'',nickname:'',birthday:'',igHandle:'',profileReady:false,chapter:0,trust:50,suspicion:12,public:18,choices:[],dm:0,igPosts:0,ending:'',igPosted:false,igPostType:'',kktMessages:[],igHandled:{}};
 const save=()=>{try{localStorage.setItem('riize_crisis_save',JSON.stringify(state))}catch(e){}};
 const load=()=>{try{let x=JSON.parse(localStorage.getItem('riize_crisis_save'));if(x&&x.profileReady&&x.me)state={...state,...x}}catch(e){}};
 function shell(cls,html){app.className='screen '+(cls||'');app.innerHTML=html}
@@ -265,7 +265,7 @@ window.startStory=()=>{
  state.screen='home';state.chapter=0;save();render()
 };
 function home(){shell('home',`<div class="scroll home"><div style="display:flex;justify-content:space-between;font-size:12px;color:#655d62"><b>MONDAY, 09:41</b><span>♡ 你的私人手机</span></div><div class="widget"><small>오늘의 날씨 · SEOUL</small><div class="time">09:41</div><div style="display:flex;justify-content:space-between"><span>多云转晴　☁</span><small>今天也要小心一点。</small></div></div><div class="appgrid">
-${[['🗨️','KKT','line'],['𝕏','X','x'],['◎','Instagram','ig'],['📷','相册','photos'],['📅','日程','schedule'],['📝','备忘录','notes'],['📩','陌生私信','dm'],['♡','关系状态','status']].map(a=>`<button class="appcell" onclick="go('${a[2]}')"><div class="appicon">${a[0]}</div><span>${a[1]}</span></button>`).join('')}
+${[['🗨️','KKT','line'],['𝕏','X','x'],['◎','Instagram','ig'],['📷','相册','photos'],['📅','日程','schedule'],['📝','备忘录','notes'],['📩','陌生私信','dm'],['💬','LYSN','lysn'],['♡','关系状态','status']].map(a=>`<button class="appcell" onclick="go('${a[2]}')"><div class="appicon">${a[0]}</div><span>${a[1]}</span></button>`).join('')}
 </div><div class="home-title">TODAY'S NOTE</div><div class="storycard"><b>今天的行程</b><p>10:30 团体练习　/　14:00 拍摄　/　晚上：自由时间<br>经纪人提醒：最近上下班尽量不要单独行动。</p></div><div class="dock"><button class="appcell" onclick="go('line')"><div class="appicon" style="background:#ffe500;color:#241f00">🗨</div></button><button class="appcell" onclick="go('x')"><div class="appicon">𝕏</div></button><button class="appcell" onclick="go('ig')"><div class="appicon">◎</div></button><button class="appcell" onclick="go('dm')"><div class="appicon">📩</div></button></div></div>`)}
 function kktNav(active){return `<div class="kkt-bottom">
  <button class="${active==='friends'?'active':''}" onclick="go('line')"><strong>♙</strong>好友</button>
@@ -310,7 +310,7 @@ function xscreen(){
    ['bluehour__17','下班路透好像看到他和成员一起走，普通团体行程而已吧。','3小时','18','96','680'],
    ['peachfilm_','最近每天都在等更新ㅠㅠ 今天也辛苦了。','4小时','12','143','902'],
    ['moodboard_021','有人知道这周公开行程是什么吗？想去支持一下。','5小时','9','71','430'],
-   ['daily_moment7','感觉最近大家都很忙，希望都能好好休息。','6小时','7','54','321']
+   ['daily_moment7','他最近怎么总是在看手机ㅋㅋ？是不是有什么秘密啊','6小时','7','54','321']
   ],hot:['RIIZE 今日舞台','成员个人直拍','RIIZE 行程讨论']},
   {name:'剧情2 · CP 讨论增加',sub:'互动细节被反复讨论',heat:'讨论升温',posts:[
    ['orbitandtea','最近这两个人互动是不是变多了？我先声明只是随便问问。','1小时','83','612','4,820'],
@@ -577,7 +577,105 @@ function showModal(title,body,buttons){let old=$('.modalback');if(old)old.remove
 function clamp(x){return Math.max(0,Math.min(100,x))}
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 window.restart=()=>{localStorage.removeItem('riize_crisis_save');state={screen:'setup',me:'',lover:'',nickname:'',birthday:'',igHandle:'',profileReady:false,chapter:0,trust:50,suspicion:12,public:18,choices:[],dm:0,igPosts:0,ending:''};render()};
-function render(){switch(state.screen){case'intro':intro();break;case'setup':setup();break;case'home':home();break;case'line':line();break;case'kktChats':kktChats();break;case'kktCalls':kktCalls();break;case'kktMore':kktMore();break;case'loverchat':loverchat();break;case'x':xscreen();break;case'ig':ig();break;case'dm':dm();break;case'openDM':openDM();break;case'photos':photos();break;case'schedule':schedule();break;case'notes':notes();break;case'status':status();break;default:home()}}
+function render(){switch(state.screen){case'intro':intro();break;case'setup':setup();break;case'home':home();break;case'line':line();break;case'kktChats':kktChats();break;case'kktCalls':kktCalls();break;case'kktMore':kktMore();break;case'loverchat':loverchat();break;case'lysn':lysn();break;case'videoCall':videoCall();break;case'x':xscreen();break;case'ig':ig();break;case'dm':dm();break;case'openDM':openDM();break;case'photos':photos();break;case'schedule':schedule();break;case'notes':notes();break;case'status':status();break;default:home()}}
+
+/* === Story-driven IG / KKT / LYSN sequence === */
+function ig(){
+ if(igView==='profile'){igProfile();return}
+ if(igView==='inbox'){igInbox();return}
+ if(igView==='strangers'){igStrangers();return}
+ if(igView==='strangerDetail'){igStrangerDetail();return}
+ const user=igUsername();
+ shell('igscreen',
+ '<div class="ig-header"><button class="ig-head-icon" onclick="igCreate()">＋</button><div class="ig-wordmark">Instagram⌄</div><button class="ig-head-icon" onclick="igNotifications()">♡</button></div>'+
+ '<div class="ig-stories"><button class="ig-story self" onclick="igTab(\'profile\')"><div class="ig-story-ring"><div class="ig-story-inner">●</div></div>你的快拍</button><button class="ig-story"><div class="ig-story-ring"><div class="ig-story-inner">🐶</div></div>haoneoo</button><button class="ig-story"><div class="ig-story-ring"><div class="ig-story-inner">♡</div></div>yjjni_k</button><button class="ig-story"><div class="ig-story-ring"><div class="ig-story-inner">RIIZE</div></div>riize_official</button></div>'+
+ '<div class="ig-feed">'+
+ (state.chapter===0&&!state.igPosted?'<div class="storycard" style="margin:12px"><b>今天的 IG 日常</b><p>发一张只有你们两个人才看得懂的照片。</p><button class="choice" onclick="igSecretPost(\'hand\')">发布：男朋友的手</button><button class="choice" onclick="igSecretPost(\'back\')">发布：男朋友的背影</button></div>':'')+
+ (state.igPosted?'<article class="ig-post"><div class="ig-post-head"><div class="ig-avatar">♡</div><div><div class="ig-post-user">'+esc(user)+'</div><div class="ig-post-loc">Seoul, Korea</div></div></div><div class="ig-post-image duo"><span class="ig-image-label">'+(state.igPostType==='hand'?'只拍到了他的手。':'没有拍到脸的背影。')+'</span></div><div class="ig-caption"><b>'+esc(user)+'</b> '+(state.igPostType==='hand'?'a little moment 🤍':'今天也想念。')+'</div><div class="ig-likes">128 次赞</div></article>':'')+
+ '<article class="ig-post"><div class="ig-post-head"><div class="ig-avatar">RIIZE</div><div><div class="ig-post-user">riize_official ✿</div><div class="ig-post-loc">Seoul</div></div></div><div class="ig-post-image food"><span class="ig-image-label">RIIZE · daily moments</span></div><div class="ig-caption"><b>riize_official</b> 오늘도 함께한 하루 ♡</div><div class="ig-comments">查看全部 664 条评论</div></article>'+
+ '<article class="ig-post"><div class="ig-post-head"><div class="ig-avatar">♡</div><div><div class="ig-post-user">'+esc(user)+'</div><div class="ig-post-loc">Seoul, Korea</div></div></div><div class="ig-post-image duo"><span class="ig-image-label">只记录今天的小小瞬间。</span></div><div class="ig-caption"><b>'+esc(user)+'</b> 오늘의 기록 🤍</div></article>'+
+ '</div>'+igNav('feed'));
+}
+window.igSecretPost=function(type){
+ state.igPosted=true;state.igPostType=type;state.igPosts=(state.igPosts||0)+1;state.choices.push('IG发布男友'+(type==='hand'?'的手':'的背影'));save();
+ showModal('已发布到 Instagram','照片发布成功。你以为只有亲近的人能看懂其中的意义。KKT 收到一条新消息。',[{t:'查看 KKT',f:function(){go('loverchat')}},{t:'留在 Instagram',f:function(){ig()}}]);
+};
+function loverchat(){kktStoryChat()}
+function kktStoryChat(){
+ const member=cn[names.indexOf(state.lover)]||'男朋友',stage=Number(state.chapter)||0,log=state.kktMessages||[];
+ const intro=stage===0?['今天好想见你。','刚刚看到你发的 IG 了。','宝宝也想我了啊ㅋㅋ我今天练习了一整天。','下次见面不要偷偷躲我了。']:stage===1?[]:[];
+ const quick=stage===0?['我也好想你。','你今天辛苦啦，什么时候能见面？','谁让你每次都躲着我ㅋㅋ']:stage===1?['你的粉丝最近有好多猜测啊宝宝','我们不会被发现吧？','被发现可怎么办啊']:['我有点害怕，我们先不要见面了。','他们已经开始怀疑我们了。','我不想再一直躲躲藏藏了。','你会不会觉得我给你添麻烦了？'];
+ let html='<div class="kkt-chat-head"><button onclick="go(\'home\')">‹</button><b>'+member+'</b><div style="margin-left:auto;display:flex;gap:16px"><button onclick="go(\'videoCall\')">▣</button><button>•••</button></div></div><div class="kkt-chat-body"><div class="kkt-chat-date">今天 21:34</div>';
+ intro.forEach(function(m){html+='<div class="kkt-chat-line"><div class="kkt-mini">'+member.slice(0,1)+'</div><div class="kkt-bubble">'+m+'</div><time>21:34</time></div>'});
+ log.forEach(function(m){html+='<div class="kkt-chat-line '+(m.from==='me'?'mine':'')+'">'+(m.from==='him'?'<div class="kkt-mini">'+member.slice(0,1)+'</div>':'')+'<div class="kkt-bubble">'+esc(m.text)+'</div></div>'});
+ html+='</div><div style="padding:10px 12px;overflow:auto;max-height:160px"><small style="color:#888">'+(stage===0?'选择回复，也可以自己输入：':stage===1?'告诉他你对粉丝猜测的担心：':'告诉他你现在的想法：')+'</small>';
+ quick.forEach(function(q,i){html+='<button class="choice" style="margin-top:6px" onclick="kktQuick('+i+')">'+q+'</button>'});
+ html+='</div><div class="kkt-compose"><input id="kktFreeText" placeholder="输入消息…" style="flex:1;min-width:0;border:0;background:transparent;outline:none;font-size:14px"><button class="send" onclick="kktSendFree()">➤</button></div>';
+ shell('kkt-chat-screen',html);
+}
+window.kktQuick=function(i){
+ const stage=Number(state.chapter)||0,opts=stage===0?['我也好想你。','你今天辛苦啦，什么时候能见面？','谁让你每次都躲着我ㅋㅋ']:stage===1?['你的粉丝最近有好多猜测啊宝宝','我们不会被发现吧？','被发现可怎么办啊']:['我有点害怕，我们先不要见面了。','他们已经开始怀疑我们了。','我不想再一直躲躲藏藏了。','你会不会觉得我给你添麻烦了？'];
+ const msg=opts[i];if(!msg)return;
+ state.kktMessages=state.kktMessages||[];state.kktMessages.push({from:'me',text:msg});
+ if(stage===0){state.trust=clamp(state.trust+(i===0?7:4));state.kktMessages.push({from:'him',text:i===0?'我就知道宝宝也想我ㅋㅋ':'我看看这周的时间，想办法见你。'});}
+ else if(stage===1){const replies=['那我们以后小心一点。','他们又没有证据ㅋㅋ','我也不想让你害怕，但现在先保护好你。'];state.kktMessages.push({from:'him',text:replies[i]});state.trust=clamp(state.trust+(i===0?4:-1));}
+ else{state.kktMessages.push({from:'him',text:state.trust>=60?'宝宝，不是你的错。我会保护好你，也会和你一起想办法。':state.trust<45?'我也很累，但我不想失去你。我们需要冷静谈谈。':'我知道了。我们先别急着做决定，好吗？'});state.trust=clamp(state.trust+(i===2?5:i===0?-2:2));state.suspicion=clamp(state.suspicion+3);}
+ state.choices.push('KKT:'+msg);save();kktStoryChat();
+};
+window.kktSendFree=function(){
+ const el=document.getElementById('kktFreeText'),msg=el&&el.value.trim();if(!msg)return;
+ state.kktMessages=state.kktMessages||[];state.kktMessages.push({from:'me',text:msg});state.kktMessages.push({from:'him',text:state.trust>=55?'嗯，我在听。宝宝慢慢说。':'我看到了。我们找时间好好聊聊。'});
+ state.trust=clamp(state.trust+2);state.choices.push('KKT自由输入');save();kktStoryChat();
+};
+function videoCall(){
+ const member=cn[names.indexOf(state.lover)]||'男朋友';
+ shell('video-call','<div style="padding:14px;display:flex;align-items:center;justify-content:space-between"><button onclick="go(\'loverchat\')">‹ 返回聊天</button><b>视频通话</b><span>LIVE</span></div><div style="padding:18px;text-align:center;color:#777">正在呼叫 '+member+'</div><div style="margin:14px;border-radius:22px;background:#171717;min-height:340px;display:flex;align-items:center;justify-content:center;overflow:hidden"><video id="callVideo" controls playsinline style="width:100%;max-height:420px;display:none"></video><div id="callPlaceholder" style="color:#fff;text-align:center;padding:24px"><div style="font-size:48px">♡</div><b>'+member+'</b><p style="font-size:12px;color:#bbb">选择你上传的 '+member+' 视频作为通话画面</p></div></div><div style="padding:12px 18px"><label class="btn-dark" style="display:block;text-align:center;cursor:pointer">上传视频<input id="callVideoFile" type="file" accept="video/*" style="display:none"></label><p style="font-size:11px;color:#888;text-align:center">本地预览，不会上传到网站服务器。</p><button class="btn-light" style="width:100%;margin-top:10px" onclick="go(\'loverchat\')">结束通话</button></div>');
+ const input=document.getElementById('callVideoFile');if(input)input.addEventListener('change',function(e){const file=e.target.files&&e.target.files[0];if(!file)return;const v=document.getElementById('callVideo');v.src=URL.createObjectURL(file);v.style.display='block';document.getElementById('callPlaceholder').style.display='none';v.play().catch(function(){});});
+}
+function lysn(){
+ const member=cn[names.indexOf(state.lover)]||'男朋友';
+ const clue=state.igPostType==='hand'?'照片角落里露出了和你 IG 动态相似的手链与袖口。':'照片背景里出现了和你 IG 动态相似的窗帘与桌面摆设。';
+ shell('lysn-screen','<div class="kkt-head"><button onclick="go(\'home\')">‹</button><h2>LYSN</h2><span style="margin-left:auto;color:#777">♡</span></div><div class="scroll" style="padding:14px"><div class="storycard"><b>Dear. '+member+'</b><p>来自 '+member+' 的 Bubble 消息</p><small>今天 22:16</small><div style="background:#f3f3f3;border-radius:14px;padding:14px;margin-top:10px"><p>오늘 하루도 고생했어 ♡</p><p>오늘 찍은 사진 보여줄게!</p><div style="height:180px;border-radius:12px;background:linear-gradient(135deg,#ddd,#aab1b7,#eee);display:flex;align-items:center;justify-content:center;color:#555">📷 今日照片</div><p style="font-size:12px;color:#777">照片中的一个小细节似乎很熟悉……</p></div><button class="btn-dark" style="width:100%;margin-top:12px" onclick="lysnReveal()">查看照片细节</button></div></div>');
+}
+window.lysnReveal=function(){
+ const member=cn[names.indexOf(state.lover)]||'男朋友';
+ state.chapter=2;state.suspicion=clamp(state.suspicion+14);state.public=clamp(state.public+9);state.choices.push('LYSN照片线索');save();
+ showModal('粉丝开始截图分析','LYSN 的照片被粉丝保存。有人发现照片里的小物件和你的 IG 动态很相似。截图开始在粉丝群里流传。',[{t:'去 Instagram 查看陌生私信',f:function(){igView='inbox';go('ig')}},{t:'稍后再看',f:function(){go('home')}}]);
+};
+function igInbox(){
+ const total=state.chapter>=2?igRequestItems.reduce(function(sum,item){return sum+(state.igHandled&&state.igHandled[item[0]]?0:item[2])},0):0;
+ shell('igscreen','<div class="ig-inbox-head"><div class="ig-inbox-name">'+esc(igUsername())+'⌄</div><div class="ig-inbox-actions"><button>⌕</button><button>▱</button></div></div><div class="ig-searchbar">⌕　搜索消息</div><div class="ig-inbox-section"><span>消息</span><button onclick="igStrangers()">陌生消息请求 '+(state.chapter>=2?'· '+total:'')+'</button></div><div class="scroll" style="flex:1;min-height:0;padding:14px"><div class="storycard"><b>'+(state.chapter>=2?'你收到了很多陌生消息':'暂时没有新的陌生消息')+'</b><p>'+(state.chapter>=2?'有人开始怀疑你和 '+cn[names.indexOf(state.lover)]+' 的关系。':'你的私信目前很安静。')+'</p><button class="choice" onclick="igStrangers()">打开消息请求</button></div></div>'+igNav('dm'));
+}
+function igStrangers(){
+ if(state.chapter<2){showModal('暂时没有陌生消息','目前还没有人注意到你的账号。',[{t:'返回',f:function(){igInbox()}}]);return}
+ const total=igRequestItems.reduce(function(sum,item){return sum+(state.igHandled&&state.igHandled[item[0]]?0:item[2])},0);
+ shell('igscreen','<div class="ig-request-head"><button onclick="igBackInbox()">‹</button><b>陌生消息请求</b></div><div class="ig-request-summary">陌生消息 · '+total+' 条未读 · '+igRequestItems.length+' 位用户</div><div class="scroll" style="flex:1;min-height:0">'+igRequestItems.map(function(a,i){return '<button class="ig-request-row" style="width:100%;text-align:left;background:#fff" onclick="igOpenStranger('+i+')"><div class="ig-request-avatar">♙</div><div class="ig-request-meta"><b>'+a[0]+'</b><p>'+a[1]+'</p></div><span class="ig-unread">'+(state.igHandled&&state.igHandled[a[0]]?'已处理':a[2])+'</span></button>'}).join('')+'</div>'+igNav('dm'));
+}
+function igStrangerDetail(){
+ const a=igRequestItems[igSelectedStranger]||igRequestItems[0];
+ shell('igscreen','<div class="ig-request-head"><button onclick="igStrangers()">‹</button><b>'+a[0]+'</b></div><div class="scroll" style="flex:1;padding:18px"><div class="ig-request-detail"><div class="ig-request-avatar">♙</div><b>'+a[0]+'</b><p>Instagram · 陌生消息请求</p></div><div style="background:#f0f1f4;border-radius:18px;padding:14px;margin-top:18px;line-height:1.6">'+a[1]+'</div><p style="font-size:11px;color:#888;text-align:center;margin-top:20px">对方没有关注你。你可以选择如何处理。</p></div><div class="ig-request-actions" style="display:grid;grid-template-columns:repeat(3,1fr);gap:5px"><button onclick="igHandleRequest(\'reply\')">回复</button><button onclick="igHandleRequest(\'ignore\')">不回复</button><button onclick="igHandleRequest(\'block\')">拉黑</button><button onclick="igHandleRequest(\'restrict\')">限制账号</button><button onclick="igHandleRequest(\'screenshot\')">截图发 KKT</button></div>'+igNav('dm'));
+}
+window.igHandleRequest=function(action){
+ const a=igRequestItems[igSelectedStranger];state.igHandled=state.igHandled||{};state.igHandled[a[0]]=action;
+ if(action==='reply'){state.suspicion=clamp(state.suspicion+5);state.choices.push('IG陌生人回复');showModal('回复消息','你回复：「请不要传播没有证实的内容，也不要再联系我。」',[{t:'返回请求',f:function(){igStrangers()}}]);}
+ else if(action==='screenshot'){state.trust=clamp(state.trust+4);state.choices.push('截图发给男朋友');state.kktMessages=state.kktMessages||[];state.kktMessages.push({from:'me',text:'我收到陌生私信了，我截图发给你了。'});showModal('截图已发送','你把私信截图发到了 KKT。',[{t:'去 KKT',f:function(){go('loverchat')}}]);}
+ else if(action==='block'){state.suspicion=clamp(state.suspicion-2);showModal('账号已拉黑','对方无法继续向你发送消息。',[{t:'返回请求',f:function(){igStrangers()}}]);}
+ else if(action==='restrict'){state.suspicion=clamp(state.suspicion-1);showModal('已限制账号','对方的互动受到限制。',[{t:'返回请求',f:function(){igStrangers()}}]);}
+ else{state.choices.push('IG陌生人不回复');showModal('你没有回复','你选择暂时不回应这条消息。',[{t:'返回请求',f:function(){igStrangers()}}]);}
+ save();
+};
+window.igBackInbox=function(){igView='inbox';igInbox()};
+window.igOpenStranger=function(i){igSelectedStranger=i;igView='strangerDetail';igStrangerDetail()};
+window.igDeclineStranger=function(){igHandleRequest('ignore')};
+window.igAcceptStranger=function(){igHandleRequest('reply')};
+window.xOpenPost=function(i){
+ const s=Math.min(6,Math.max(0,Number(state.chapter)||0));
+ if(s===0&&i===4){state.chapter=1;state.suspicion=clamp(state.suspicion+7);state.public=clamp(state.public+6);state.choices.push('点击X疑心帖子进入剧情2');save();showModal('剧情2触发 · 讨论开始增加','你点开那条关于他最近总在看手机的帖子。评论区里开始出现更多相似的观察和猜测。',[{t:'查看讨论',f:function(){xscreen()}},{t:'去 KKT 告诉男朋友',f:function(){go('loverchat')}}]);return}
+ const phaseNames=['日常讨论','CP 互动讨论','圈外恋情猜测','站姐线索整理','热搜与粉圈争论','舆论压力','最终走向'];
+ const replies=s===1?['没有吧，他最近练习很认真啊。','某些人是不是疑心病……','状态好不是好事吗？状态好能把你们克死是不是。','他最近是不是经常穿同一件外套？','你们有没有发现他最近总是在看手机ㅋㅋ','他最近怎么不和队友一辆车啊？']:['没有证据不要乱猜。','请不要去扒普通人的账号。','希望大家尊重当事人的私人生活。'];
+ showModal(phaseNames[s]+' · 评论区',replies.map(function(v,j){return '@'+['mood_note','bluehour_17','daily_cloud','film_archive','peachday'][j]+ '：'+v}).join('\n\n'),[{t:'返回时间线',f:function(){xscreen()}}]);
+};
+
 load();if(state.me&&state.lover&&state.profileReady&&state.screen!=='intro'&&state.screen!=='setup'){}else state.screen='setup';render();
 })();
 </script></body></html>
