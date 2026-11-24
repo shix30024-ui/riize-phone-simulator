@@ -5,292 +5,84 @@
 <meta name="theme-color" content="#f8e5eb"><title>RIIZE · 恋爱危机模拟器</title>
 <style>
 :root{--pink:#f8e5eb;--ink:#17181c;--muted:#92949b;--line:#ececf0;--blue:#bed0e8;--green:#80e669}
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{margin:0;height:100%;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans SC",sans-serif;color:var(--ink);background:#f1f1f1}button,input{font:inherit}button{cursor:pointer;border:0}#phone{width:min(100%,460px);height:100dvh;max-height:940px;margin:auto;background:white;position:relative;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 8px 40px #0001}.status{height:43px;flex-shrink:0;padding:12px 24px 5px;display:flex;justify-content:space-between;font-size:14px;font-weight:700;background:inherit;z-index:5}.screen{display:flex;flex-direction:column;min-height:0;flex:1;overflow:hidden;background:#fff}.scroll{overflow:auto;min-height:0;flex:1;scrollbar-width:none}.scroll::-webkit-scrollbar{display:none}.top{height:53px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:0 18px;border-bottom:1px solid #f0f0f2}.top button{background:none;color:#087be0;font-size:16px}.top b{font-size:16px}.home-indicator{height:22px;flex-shrink:0;display:grid;place-items:center;background:inherit;border:0;padding:0;width:100%;cursor:pointer;touch-action:manipulation;z-index:20}.home-indicator:after{content:"";width:108px;height:4px;border-radius:8px;background:#191919;transition:width .12s,transform .12s}.home-indicator:active:after{width:76px;transform:scaleY(1.35)}.intro{background:#111218;color:white;padding:25px 25px 28px;justify-content:space-between}.eyebrow{font-size:10px;letter-spacing:.24em;color:#a4a7b0;text-align:center}.intro h1{font-weight:450;font-size:27px;line-height:1.4;text-align:center;margin:25px 0}.intro p{font-size:14px;color:#c5c6cd;line-height:1.9}.btn-dark,.btn-light{width:100%;padding:15px;border-radius:13px;font-weight:650}.btn-dark{background:#191a20;color:#fff}.btn-light{background:#f2f2f5;color:#17181c}.intro .btn-dark{background:#f6e3e9;color:#242127}.setup{padding:24px 21px 18px;overflow:auto}.brand{font-family:Georgia,serif;font-size:27px;font-weight:700;letter-spacing:-1px}.sub{font-size:12px;color:#9699a1;line-height:1.7}.section{font-size:15px;font-weight:750;margin:22px 0 10px}.members{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.member{border:1px solid #e6e6e9;background:#fff;border-radius:13px;padding:13px 5px;text-align:center;min-height:72px}.member strong{display:block;font-size:15px}.member small{font-size:10px;color:#a0a1a7}.member.active{border:1.5px solid #25262c;background:#f8eef1;box-shadow:0 0 0 2px #f8e5eb}.love-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.love{border:1px solid #e7e7eb;background:#fff;border-radius:12px;padding:12px;text-align:left;font-size:13px}.love.active{border:1.5px solid #202127;background:#f8eef1}.love:disabled{opacity:.3}.field{width:100%;border:1px solid #e3e4e8;border-radius:11px;padding:13px;background:#fafafd;margin-top:8px;outline:none}.hint{font-size:11px;color:#999da5;line-height:1.6;margin:9px 0 15px}.home{background:var(--pink);padding:13px 18px 20px;position:relative}.widget{background:linear-gradient(145deg,#292b3c,#171927);color:#fff;border-radius:22px;padding:17px;margin:5px 0 19px;height:155px;display:flex;flex-direction:column;justify-content:space-between}.widget .time{font-size:42px;font-weight:300}.widget small{color:#c8c8d1}.appgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px 8px}.appicon{background:#fff;width:59px;height:59px;margin:auto;border-radius:16px;display:grid;place-items:center;font-size:26px;box-shadow:0 2px 4px #0001}.appcell{text-align:center;background:none}.appcell span{font-size:10px;display:block;margin-top:6px;font-weight:600}.dock{margin-top:auto;height:77px;background:#ffffff8c;border-radius:25px;display:flex;align-items:center;justify-content:space-around;backdrop-filter:blur(14px)}.dock .appicon{width:51px;height:51px}.home-title{font-size:13px;font-weight:700;margin:16px 0 10px}.feed{padding:0 17px}.post{padding:16px 0;border-bottom:1px solid #eee}.posthead{display:flex;gap:9px;align-items:center;font-size:12px;color:#6f7780}.avatar{width:34px;height:34px;border-radius:50%;background:#e8e9ed;display:grid;place-items:center;font-weight:700;color:#65707a}.postbody{font-size:14px;line-height:1.7;margin:9px 0}.postmeta{font-size:11px;color:#92969d}.tabs{height:53px;display:flex;border-top:1px solid #eee;justify-content:space-around;align-items:center;flex-shrink:0}.tabs button{background:none;color:#92969d;font-size:11px}.tabs button.active{color:#16171b;font-weight:750}.chatbg{background:#bdcfe5}.chatmsgs{padding:14px 12px;overflow:auto;flex:1}.date{text-align:center;color:#647286;font-size:11px;margin:13px}.msg{display:flex;gap:7px;margin:11px 0;align-items:flex-end}.msg.me{justify-content:flex-end}.bubble{background:white;padding:10px 12px;border-radius:15px 15px 15px 4px;max-width:82%;font-size:14px;line-height:1.55;white-space:pre-wrap}.msg.me .bubble{background:#80e669;border-radius:15px 15px 4px 15px}.choices{background:#f8f8fa;padding:11px 12px 14px;border-top:1px solid #e1e1e4;max-height:42%;overflow:auto}.choices small{display:block;text-align:center;color:#858890;margin-bottom:8px}.choice{width:100%;padding:11px 12px;border:1px solid #e5e5e8;border-radius:11px;background:#fff;text-align:left;margin:4px 0;font-size:13px;line-height:1.5}.choice:active{background:#f8e8ed}.xscreen{background:#fff}.xpost{padding:14px 15px;border-bottom:1px solid #edf0f2;display:flex;gap:10px}.xpost .avatar{flex-shrink:0}.xpost .body{font-size:14px;line-height:1.65;white-space:pre-wrap}.xpost .who{font-size:12px;color:#7c858f}.xpost .stats{font-size:11px;color:#8b929a;margin-top:8px}
-/* Instagram-style feed and profile */
-.igscreen{background:#fff;color:#101114}
-.ig-header{height:66px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:0 18px;background:#fff}
-.ig-wordmark{font-family:Georgia,serif;font-size:28px;font-weight:700;letter-spacing:-1.5px}
-.ig-head-icon{font-size:28px;line-height:1;background:none;color:#111;padding:4px 7px}
-.ig-stories{display:flex;gap:13px;overflow:auto;padding:4px 12px 13px;border-bottom:1px solid #eee;scrollbar-width:none}
-.ig-stories::-webkit-scrollbar{display:none}
-.ig-story{width:82px;flex:0 0 82px;text-align:center;background:none;padding:0;color:#191a1e;font-size:11px}
-.ig-story-ring{width:72px;height:72px;border-radius:50%;padding:3px;margin:0 auto 5px;background:conic-gradient(#ffb900,#ff4c52,#d900a8,#ffb900);display:grid;place-items:center}
-.ig-story-inner{width:100%;height:100%;border-radius:50%;border:2px solid white;background:#e9eaf0;display:grid;place-items:center;overflow:hidden;font-size:28px;color:#7c8490}
-.ig-story.self .ig-story-ring{background:#ddd}
-.ig-story.self .ig-story-inner{background:#f0f1f4}
-.ig-feed{overflow:auto;min-height:0;flex:1;scrollbar-width:none}
-.ig-feed::-webkit-scrollbar{display:none}
-.ig-post{border-bottom:1px solid #eee;padding-bottom:8px}
-.ig-post-head{height:57px;display:flex;align-items:center;padding:0 13px;gap:9px}
-.ig-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#203d56,#a7c0d1);display:grid;place-items:center;color:white;font-weight:700;font-size:12px;flex-shrink:0}
-.ig-post-user{font-size:13px;font-weight:700;line-height:1.35}
-.ig-post-loc{font-size:10px;color:#60646b;font-weight:400}
-.ig-more{margin-left:auto;background:none;font-size:22px;padding:5px 7px}
-.ig-post-image{height:360px;position:relative;overflow:hidden;background:linear-gradient(135deg,#b8c4bc,#6d7e74 48%,#d2bba5);display:flex;align-items:flex-end;padding:16px;color:white}
-.ig-post-image:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#0000 45%,#0005),radial-gradient(ellipse at 75% 20%,#f1d6ae88,transparent 35%)}
-.ig-post-image:after{content:"";position:absolute;width:54%;height:75%;left:23%;bottom:-10%;border-radius:48% 48% 8% 8%;background:linear-gradient(90deg,#272b32,#6d7175 48%,#25282c);box-shadow:90px 10px 0 -18px #c6a47e;opacity:.85;transform:rotate(-7deg)}
-.ig-post-image.food{background:linear-gradient(145deg,#e9d8c2,#a76e38 55%,#4d392c)}
-.ig-post-image.food:after{width:78%;height:55%;left:10%;bottom:12%;border-radius:50%;background:radial-gradient(ellipse,#e4a64f 0 28%,#6d3926 30% 42%,#f1e8d9 44% 60%,#b6a18d 62%);transform:rotate(-8deg);box-shadow:none}
-.ig-post-image.duo{background:linear-gradient(140deg,#b8c9d2,#687c82 50%,#c6b79e)}
-.ig-post-image.duo:after{width:34%;height:67%;left:17%;bottom:-6%;border-radius:44% 44% 5% 5%;background:linear-gradient(90deg,#1b2028,#444a51);box-shadow:130px 4px 0 -3px #45434b;transform:rotate(5deg)}
-.ig-image-label{position:relative;z-index:2;font-size:11px;text-shadow:0 1px 4px #0008}
-.ig-post-actions{display:flex;align-items:center;gap:13px;padding:9px 13px 3px}
-.ig-action{background:none;padding:0;color:#17181b;font-size:25px;line-height:1}
-.ig-action.save{margin-left:auto}
-.ig-likes{font-size:12px;font-weight:700;padding:0 13px}
-.ig-caption{font-size:12px;line-height:1.5;padding:4px 13px}
-.ig-caption b{margin-right:5px}
-.ig-comments{font-size:11px;color:#8b8d94;padding:2px 13px}
-.ig-bottom{height:58px;flex-shrink:0;border-top:1px solid #eee;display:flex;align-items:center;justify-content:space-around;background:#fff}
-.ig-bottom button{width:20%;height:100%;background:none;color:#111;font-size:26px;display:grid;place-items:center}
-.ig-bottom button.active{font-weight:900}
-.ig-profile-scroll{overflow:auto;min-height:0;flex:1;scrollbar-width:none}
-.ig-profile-top{height:65px;display:flex;align-items:center;justify-content:space-between;padding:0 18px}
-.ig-profile-name{font-size:21px;font-weight:750}
-.ig-profile-head{display:flex;align-items:center;padding:6px 18px 18px;gap:18px}
-.ig-profile-avatar{width:92px;height:92px;border-radius:50%;background:#f0f1f4;display:grid;place-items:center;color:#777f89;font-size:42px;position:relative;flex-shrink:0}
-.ig-profile-avatar:after{content:"";position:absolute;inset:0;border-radius:50%;border:1px solid #e4e5e8}
-.ig-profile-stats{display:flex;flex:1;justify-content:space-around;text-align:center;font-size:12px}
-.ig-profile-stats b{display:block;font-size:17px;margin-bottom:2px}
-.ig-bio{font-size:12px;line-height:1.6;padding:0 18px 12px}
-.ig-profile-buttons{display:flex;gap:7px;padding:5px 17px 15px}
-.ig-profile-buttons button{background:#eff0f3;border-radius:9px;padding:10px 5px;flex:1;font-size:12px;font-weight:700}
-.ig-profile-buttons button:last-child{flex:0 0 43px}
-.ig-discover{padding:8px 18px 14px}
-.ig-discover-title{font-size:14px;font-weight:750;margin-bottom:10px}
-.ig-discover-card{width:190px;border:1px solid #e5e6e9;border-radius:16px;padding:12px;text-align:center}
-.ig-discover-logo{height:80px;display:grid;place-items:center;font-size:44px;color:#4b5cff}
-.ig-discover-card b{font-size:12px;display:block;margin-bottom:10px}
-.ig-discover-card button{background:#4b5cff;color:#fff;border-radius:9px;padding:9px 12px;width:100%;font-size:12px;font-weight:700}
-.ig-profile-tabs{height:49px;border-bottom:1px solid #eee;display:flex;justify-content:space-around;align-items:center;font-size:22px}
-.ig-profile-tabs button{height:100%;width:50%;background:none;color:#7b8088}
-.ig-profile-tabs button.active{color:#111;border-bottom:2px solid #111}
-.ig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
-.ig-grid-tile{aspect-ratio:1;background:linear-gradient(140deg,#e8d8d1,#a9b5b7);display:grid;place-items:center;color:#fff;font-size:24px}
-.ig-grid-tile:nth-child(2n){background:linear-gradient(140deg,#c8c1c4,#8b929d)}
-.ig-grid-tile:nth-child(3n){background:linear-gradient(140deg,#d6c7b4,#837e7a)}
-.storycard{margin:13px 15px;background:#f5f5f7;border-radius:15px;padding:15px}.storycard b{font-size:14px}.storycard p{font-size:12px;color:#666;line-height:1.7}.meter{height:7px;background:#eee;border-radius:8px;overflow:hidden;margin-top:7px}.meter i{height:100%;display:block;background:#e7a4b8}.modalback{position:absolute;inset:0;background:#0007;z-index:10;display:grid;place-items:center;padding:25px}.modal{background:#fff;border-radius:17px;padding:23px;width:100%;max-width:330px}.modal h3{margin:0 0 10px}.modal p{font-size:13px;color:#666;line-height:1.7}.modal button{margin-top:8px}.muted{color:#999}.danger{color:#d65a68}.ending{padding:28px 23px;text-align:center;justify-content:center}.ending h1{font-size:26px}.ending p{font-size:14px;color:#737780;line-height:1.9}.pill{display:inline-block;padding:5px 9px;background:#f7e7ec;border-radius:30px;color:#966476;font-size:10px;margin:3px}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{margin:0;height:100%;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans SC",sans-serif;color:var(--ink);background:#f1f1f1}button,input{font:inherit}button{cursor:pointer;border:0}#phone{width:min(100%,460px);height:100dvh;max-height:940px;margin:auto;background:white;position:relative;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 8px 40px #0001}.status{height:43px;flex-shrink:0;padding:12px 24px 5px;display:flex;justify-content:space-between;font-size:14px;font-weight:700;background:inherit;z-index:5}.screen{display:flex;flex-direction:column;min-height:0;flex:1;overflow:hidden;background:#fff}.scroll{overflow:auto;min-height:0;flex:1;scrollbar-width:none}.scroll::-webkit-scrollbar{display:none}.top{height:53px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:0 18px;border-bottom:1px solid #f0f0f2}.top button{background:none;color:#087be0;font-size:16px}.top b{font-size:16px}.home-indicator{height:22px;flex-shrink:0;display:grid;place-items:center;background:inherit}.home-indicator:after{content:"";width:108px;height:4px;border-radius:8px;background:#191919}.intro{background:#111218;color:white;padding:25px 25px 28px;justify-content:space-between}.eyebrow{font-size:10px;letter-spacing:.24em;color:#a4a7b0;text-align:center}.intro h1{font-weight:450;font-size:27px;line-height:1.4;text-align:center;margin:25px 0}.intro p{font-size:14px;color:#c5c6cd;line-height:1.9}.btn-dark,.btn-light{width:100%;padding:15px;border-radius:13px;font-weight:650}.btn-dark{background:#191a20;color:#fff}.btn-light{background:#f2f2f5;color:#17181c}.intro .btn-dark{background:#f6e3e9;color:#242127}.setup{padding:24px 21px 18px;overflow:auto}.brand{font-family:Georgia,serif;font-size:27px;font-weight:700;letter-spacing:-1px}.sub{font-size:12px;color:#9699a1;line-height:1.7}.section{font-size:15px;font-weight:750;margin:22px 0 10px}.members{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.member{border:1px solid #e6e6e9;background:#fff;border-radius:13px;padding:13px 5px;text-align:center;min-height:72px}.member strong{display:block;font-size:15px}.member small{font-size:10px;color:#a0a1a7}.member.active{border:1.5px solid #25262c;background:#f8eef1;box-shadow:0 0 0 2px #f8e5eb}.love-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.love{border:1px solid #e7e7eb;background:#fff;border-radius:12px;padding:12px;text-align:left;font-size:13px}.love.active{border:1.5px solid #202127;background:#f8eef1}.love:disabled{opacity:.3}.field{width:100%;border:1px solid #e3e4e8;border-radius:11px;padding:13px;background:#fafafd;margin-top:8px;outline:none}.hint{font-size:11px;color:#999da5;line-height:1.6;margin:9px 0 15px}.home{background:var(--pink);padding:13px 18px 20px;position:relative}.widget{background:linear-gradient(145deg,#292b3c,#171927);color:#fff;border-radius:22px;padding:17px;margin:5px 0 19px;height:155px;display:flex;flex-direction:column;justify-content:space-between}.widget .time{font-size:42px;font-weight:300}.widget small{color:#c8c8d1}.appgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px 8px}.appicon{background:#fff;width:59px;height:59px;margin:auto;border-radius:16px;display:grid;place-items:center;font-size:26px;box-shadow:0 2px 4px #0001}.appcell{text-align:center;background:none}.appcell span{font-size:10px;display:block;margin-top:6px;font-weight:600}.dock{margin-top:auto;height:77px;background:#ffffff8c;border-radius:25px;display:flex;align-items:center;justify-content:space-around;backdrop-filter:blur(14px)}.dock .appicon{width:51px;height:51px}.home-title{font-size:13px;font-weight:700;margin:16px 0 10px}.feed{padding:0 17px}.post{padding:16px 0;border-bottom:1px solid #eee}.posthead{display:flex;gap:9px;align-items:center;font-size:12px;color:#6f7780}.avatar{width:34px;height:34px;border-radius:50%;background:#e8e9ed;display:grid;place-items:center;font-weight:700;color:#65707a}.postbody{font-size:14px;line-height:1.7;margin:9px 0}.postmeta{font-size:11px;color:#92969d}.tabs{height:53px;display:flex;border-top:1px solid #eee;justify-content:space-around;align-items:center;flex-shrink:0}.tabs button{background:none;color:#92969d;font-size:11px}.tabs button.active{color:#16171b;font-weight:750}.chatbg{background:#bdcfe5}.chatmsgs{padding:14px 12px;overflow:auto;flex:1}.date{text-align:center;color:#647286;font-size:11px;margin:13px}.msg{display:flex;gap:7px;margin:11px 0;align-items:flex-end}.msg.me{justify-content:flex-end}.bubble{background:white;padding:10px 12px;border-radius:15px 15px 15px 4px;max-width:82%;font-size:14px;line-height:1.55;white-space:pre-wrap}.msg.me .bubble{background:#80e669;border-radius:15px 15px 4px 15px}.choices{background:#f8f8fa;padding:11px 12px 14px;border-top:1px solid #e1e1e4;max-height:42%;overflow:auto}.choices small{display:block;text-align:center;color:#858890;margin-bottom:8px}.choice{width:100%;padding:11px 12px;border:1px solid #e5e5e8;border-radius:11px;background:#fff;text-align:left;margin:4px 0;font-size:13px;line-height:1.5}.choice:active{background:#f8e8ed}.xscreen{background:#fff}.xpost{padding:14px 15px;border-bottom:1px solid #edf0f2;display:flex;gap:10px}.xpost .avatar{flex-shrink:0}.xpost .body{font-size:14px;line-height:1.65;white-space:pre-wrap}.xpost .who{font-size:12px;color:#7c858f}.xpost .stats{font-size:11px;color:#8b929a;margin-top:8px}.igprofile{padding:20px}.ighead{display:flex;gap:17px;align-items:center}.igbig{width:75px;height:75px;border-radius:50%;background:#f1e6eb;display:grid;place-items:center;font-size:26px}.igstats{display:flex;gap:18px;font-size:12px;text-align:center}.igstats b{display:block;font-size:15px}.igbio{font-size:12px;line-height:1.7;margin:13px 0}.iggrid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}.igphoto{aspect-ratio:1;background:linear-gradient(140deg,#e8d8d1,#a9b5b7);display:grid;place-items:center;font-size:24px;color:#fff}.igphoto:nth-child(2n){background:linear-gradient(140deg,#c8c1c4,#8b929d)}.igphoto:nth-child(3n){background:linear-gradient(140deg,#d6c7b4,#837e7a)}.storycard{margin:13px 15px;background:#f5f5f7;border-radius:15px;padding:15px}.storycard b{font-size:14px}.storycard p{font-size:12px;color:#666;line-height:1.7}.meter{height:7px;background:#eee;border-radius:8px;overflow:hidden;margin-top:7px}.meter i{height:100%;display:block;background:#e7a4b8}.modalback{position:absolute;inset:0;background:#0007;z-index:10;display:grid;place-items:center;padding:25px}.modal{background:#fff;border-radius:17px;padding:23px;width:100%;max-width:330px}.modal h3{margin:0 0 10px}.modal p{font-size:13px;color:#666;line-height:1.7}.modal button{margin-top:8px}.muted{color:#999}.danger{color:#d65a68}.ending{padding:28px 23px;text-align:center;justify-content:center}.ending h1{font-size:26px}.ending p{font-size:14px;color:#737780;line-height:1.9}.pill{display:inline-block;padding:5px 9px;background:#f7e7ec;border-radius:30px;color:#966476;font-size:10px;margin:3px}
+.thread-head{height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;border-bottom:1px solid #eee;font-weight:750}
+.thread-head button{background:none;font-size:18px}
+.thread-tabs{display:flex;justify-content:space-around;border-bottom:1px solid #eee;padding:12px 0;font-size:12px;color:#777}
+.thread-post{display:flex;gap:10px;padding:14px 15px;border-bottom:1px solid #eee}
+.thread-avatar{width:34px;height:34px;flex-shrink:0;border-radius:50%;background:#f5e6eb;display:grid;place-items:center}
+.thread-body{flex:1;font-size:13px;line-height:1.65}
+.thread-meta{font-size:11px;color:#888;margin-bottom:5px}
+.thread-actions{display:flex;gap:20px;color:#858585;font-size:11px;margin-top:8px}
+.thread-actions button{background:none;color:inherit;padding:0}
+
 @media(min-width:600px){#phone{height:min(96dvh,940px);margin:2dvh auto;border-radius:28px}.home-indicator{height:24px}}
-
-/* KKT / KakaoTalk-inspired interface */
-.kkt-page{background:#fff;color:#191b20}
-.kkt-head{height:66px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:0 20px;background:#fff}
-.kkt-head h2{font-size:25px;letter-spacing:-1px;margin:0;font-weight:750}
-.kkt-actions{display:flex;align-items:center;gap:20px}
-.kkt-actions button{background:none;color:#191b20;font-size:23px;padding:2px}
-.kkt-profile{display:flex;align-items:center;gap:14px;padding:24px 20px 28px}
-.kkt-avatar{width:64px;height:64px;border-radius:22px;background:#e4e6f5;color:#96a3d4;display:grid;place-items:center;font-size:25px;flex-shrink:0}
-.kkt-profile b{font-size:20px}.kkt-profile small{display:block;color:#9297a2;font-size:13px;margin-top:7px}
-.kkt-divider{height:8px;background:#f6f7f8}.kkt-section-title{padding:17px 20px 9px;color:#777d87;font-size:13px;font-weight:650}
-.kkt-person{min-height:112px;display:flex;align-items:center;padding:13px 16px 13px 20px;gap:14px}
-.kkt-person .kkt-avatar{width:64px;height:64px;border-radius:22px}.kkt-person .person-name{font-size:18px;font-weight:700;flex:1}
-.kkt-person .person-sub{font-size:13px;color:#9ba1ab;margin-top:6px}.kkt-chevron{color:#b5bac3;font-size:25px}
-.kkt-bottom{height:69px;flex-shrink:0;border-top:1px solid #eceef1;display:flex;align-items:center;justify-content:space-around;background:#fff}
-.kkt-bottom button{background:none;color:#aeb3bb;min-width:54px;font-size:11px;display:flex;flex-direction:column;align-items:center;gap:3px}
-.kkt-bottom button strong{font-size:22px;font-weight:400;line-height:1.1}.kkt-bottom button.active{color:#191b20;font-weight:750}
-.kkt-chatrow{height:112px;display:flex;align-items:center;padding:12px 15px 12px 19px;gap:14px}
-.kkt-chatrow .kkt-avatar{width:64px;height:64px;border-radius:22px}.kkt-chatrow .chat-meta{flex:1;min-width:0}
-.kkt-chatrow b{font-size:18px}.kkt-chatrow p{font-size:13px;color:#969ca6;margin:7px 0 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.kkt-chatrow .chat-time{font-size:11px;color:#a4a9b1;align-self:flex-start;margin-top:9px}
-.kkt-callbtn{width:56px;height:56px;border-radius:19px;background:#f2f3f5;color:#1c2026;font-size:22px;margin-left:7px}
-.kkt-chat-screen{background:#b4c9d7}.kkt-chat-head{height:64px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:0 17px;background:#b4c9d7}
-.kkt-chat-head button{background:none;font-size:21px;color:#20252b}.kkt-chat-head b{font-size:18px}
-.kkt-chat-body{flex:1;overflow:auto;padding:12px 12px 18px}.kkt-chat-date{text-align:center;color:#607987;font-size:11px;margin:8px 0 18px}
-.kkt-chat-line{display:flex;gap:8px;align-items:flex-end;margin:13px 0}.kkt-chat-line.mine{justify-content:flex-end}
-.kkt-chat-line .kkt-mini{width:38px;height:38px;border-radius:13px;background:#dce5e9;display:grid;place-items:center;font-size:14px;flex-shrink:0}
-.kkt-chat-line .kkt-bubble{max-width:78%;background:#fff;border-radius:0 17px 17px 17px;padding:11px 13px;font-size:15px;line-height:1.55;white-space:pre-wrap}
-.kkt-chat-line.mine .kkt-bubble{background:#ffe500;border-radius:17px 0 17px 17px}.kkt-chat-line time{font-size:10px;color:#5f7886;white-space:nowrap;margin-bottom:3px}
-.kkt-replybox{flex-shrink:0;background:#fff;border:1px solid #e8e5f0;border-radius:19px;margin:8px 10px 10px;padding:12px}
-.kkt-replybox small{display:block;color:#8a8997;font-size:12px;margin-bottom:8px}.kkt-replybox .choice{border:1px solid #e1dcef;background:#faf9fd;border-radius:13px;font-size:14px;padding:12px;margin:5px 0}
-.kkt-compose{height:58px;flex-shrink:0;margin:0 8px 8px;border-radius:30px;background:#f5f7f8;border:1px solid #d7e0e5;display:flex;align-items:center;padding:0 12px;gap:10px;color:#8399a7}
-.kkt-compose .plus{width:38px;height:38px;border-radius:50%;background:white;color:#20252b;display:grid;place-items:center;font-size:25px}
-.kkt-compose .send{margin-left:auto;width:39px;height:39px;border-radius:50%;background:#fff2a1;color:#8c8b7b;display:grid;place-items:center;font-size:19px}
-.kkt-chat-screen .home-indicator{background:#b4c9d7}
-
-
-/* X timeline — mobile layout based on the supplied reference */
-.xscreen{background:#fff;color:#16181c;position:relative}.xscreen>.choices{display:none}
-.x-topline{height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;flex-shrink:0}
-.x-topline .x-userpic{width:34px;height:34px;border-radius:50%;background:linear-gradient(145deg,#ead7c8,#b8c7d0);display:grid;place-items:center;font-size:16px;position:relative}
-.x-topline .x-userpic:after{content:"";position:absolute;width:9px;height:9px;border-radius:50%;background:#1d9bf0;right:-1px;top:0;border:1.5px solid white}
-.x-logo{font-family:Arial,sans-serif;font-size:35px;font-weight:400;line-height:1;color:#050505}
-.x-topline .x-spacer{width:34px}
-.x-tabs{height:58px;display:flex;align-items:stretch;justify-content:space-around;border-bottom:1px solid #e6e8eb;flex-shrink:0}
-.x-tabs button{background:none;color:#687078;font-size:15px;font-weight:700;padding:0 8px;position:relative;white-space:nowrap}
-.x-tabs button.active{color:#111;font-weight:800}
-.x-tabs button.active:after{content:"";height:3px;border-radius:4px;background:#111;position:absolute;bottom:0;left:0;right:0}
-.x-feed{flex:1;min-height:0;overflow:auto;padding-bottom:12px}
-.x-feed-post{display:flex;gap:10px;padding:13px 13px 11px;border-bottom:1px solid #e8eaed}
-.x-feed-avatar{width:42px;height:42px;border-radius:50%;flex-shrink:0;display:grid;place-items:center;font-weight:700;font-size:16px;color:#fff;background:linear-gradient(145deg,#8b9ba9,#3e4d5c)}
-.x-feed-content{min-width:0;flex:1}
-.x-feed-meta{font-size:13px;color:#687782;line-height:1.4}
-.x-feed-meta b{color:#17191d;font-size:14px}
-.x-feed-meta .verified{color:#1d9bf0}
-.x-feed-text{font-size:15px;line-height:1.5;margin-top:4px;white-space:pre-wrap;overflow-wrap:anywhere}
-.x-feed-text .tag{color:#1d9bf0}
-.x-media-grid{display:grid;grid-template-columns:1fr 1.12fr;gap:5px;margin-top:9px;height:235px;border-radius:13px;overflow:hidden}
-.x-media-photo{position:relative;overflow:hidden;background:linear-gradient(145deg,#d7d4c8,#8d9a8d 48%,#3f4c4c);display:flex;align-items:flex-end;padding:9px;color:#fff;font-size:10px;text-shadow:0 1px 4px #000}
-.x-media-photo:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 38%,#e4d2c2 0 10%,transparent 11%),linear-gradient(110deg,transparent 35%,#303d46aa 36% 66%,transparent 67%),linear-gradient(0deg,#17202c99,transparent 58%)}
-.x-media-photo.tall{background:linear-gradient(140deg,#b9c5c2,#d7c6ad 45%,#596b5e)}
-.x-media-photo.tall:before{background:radial-gradient(ellipse at 52% 42%,#d9bba7 0 9%,transparent 10%),linear-gradient(90deg,transparent 30%,#293541 31% 60%,transparent 61%),linear-gradient(0deg,#17202caa,transparent 55%)}
-.x-media-stack{display:grid;grid-template-rows:1fr 1fr;gap:5px;min-height:0}
-.x-media-stack .x-media-photo{padding:6px}
-.x-actions{display:flex;justify-content:space-between;align-items:center;color:#657480;font-size:12px;margin-top:9px;padding-right:3px}
-.x-actions button{background:none;color:inherit;padding:2px 0;font-size:12px;display:flex;align-items:center;gap:4px}
-.x-actions button.liked{color:#f91880}
-.x-actions .glyph{font-size:19px;line-height:1}
-.x-ad{padding:13px 13px 14px;border-bottom:1px solid #e8eaed}
-.x-ad-head{display:flex;gap:10px;align-items:flex-start}
-.x-ad-logo{width:42px;height:42px;border-radius:50%;background:#ff6a00;color:white;font-weight:900;display:grid;place-items:center;font-size:20px}
-.x-ad-label{margin-left:auto;color:#74818a;font-size:12px}
-.x-ad-copy{font-size:15px;line-height:1.45;margin:5px 0 9px}
-.x-ad-banner{height:145px;border-radius:12px;background:linear-gradient(120deg,#ff4e9b,#ff8eae 48%,#32c7d3);display:flex;align-items:center;justify-content:center;color:white;font-weight:900;font-size:31px;text-align:center;text-shadow:1px 2px 2px #a23d7a}
-.x-compose-fab{position:absolute;right:19px;bottom:73px;width:58px;height:58px;border-radius:50%;background:#1d9bf0;color:#fff;font-size:32px;box-shadow:0 3px 12px #0002}
-.x-bottom{height:61px;border-top:1px solid #e7e9ec;display:flex;align-items:center;justify-content:space-around;flex-shrink:0;background:#fff}
-.x-bottom button{background:none;color:#111;font-size:25px;width:20%;height:100%}
-.x-bottom button.active{font-weight:900}
-.x-thread-tag{display:inline-block;color:#1d9bf0}
-
-
-/* Instagram direct inbox + message requests */
-.ig-inbox-head{height:62px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:0 20px}
-.ig-inbox-name{font-size:22px;font-weight:750;letter-spacing:-.5px}
-.ig-inbox-actions{display:flex;gap:22px;font-size:25px}
-.ig-searchbar{margin:5px 18px 15px;background:#eff0f4;border-radius:28px;padding:12px 16px;color:#737b86;font-size:15px}
-.ig-notes{display:flex;gap:22px;padding:8px 18px 15px;overflow:auto;flex-shrink:0}
-.ig-note{width:90px;flex:0 0 90px;text-align:center;font-size:12px}
-.ig-note-avatar{width:76px;height:76px;border-radius:50%;margin:0 auto 7px;background:#eff0f4;display:grid;place-items:center;font-size:30px;color:#89919c;position:relative}
-.ig-note-avatar.has-note{background:linear-gradient(145deg,#b7dff0,#7bb9d8);color:#fff}
-.ig-note-bubble{position:absolute;top:-5px;left:-8px;background:#fff;border-radius:18px;padding:7px 9px;font-size:10px;color:#737b86;box-shadow:0 2px 12px #0001;white-space:normal;width:90px}
-.ig-inbox-section{display:flex;align-items:center;justify-content:space-between;padding:8px 20px;font-size:17px;font-weight:750}
-.ig-inbox-section button{background:none;color:#707986;font-size:14px}
-.ig-empty{padding:22px 22px 28px;color:#8a929e;font-size:14px}
-.ig-recommend-title{padding:10px 20px;font-size:17px;font-weight:750}
-.ig-recommend{display:flex;align-items:center;gap:12px;padding:9px 20px}
-.ig-recommend-avatar{width:58px;height:58px;border-radius:50%;background:#e9eaf0;display:grid;place-items:center;font-size:24px;flex-shrink:0}
-.ig-recommend small{display:block;color:#8a929e;margin-top:3px}
-.ig-request-head{height:58px;display:flex;align-items:center;gap:24px;padding:0 17px;border-bottom:1px solid #eee;flex-shrink:0}
-.ig-request-head button{background:none;font-size:27px}
-.ig-request-head b{font-size:20px}
-.ig-request-summary{padding:22px 18px 18px;border-bottom:1px solid #eee;color:#8b92a0;font-size:14px;font-weight:650}
-.ig-request-row{min-height:106px;display:flex;align-items:center;gap:14px;padding:14px 16px;border-bottom:1px solid #eee}
-.ig-request-avatar{width:66px;height:66px;flex:0 0 66px;border-radius:50%;background:#e9eaed;color:#9da2ac;display:grid;place-items:center;font-size:30px}
-.ig-request-meta{flex:1;min-width:0}
-.ig-request-meta b{font-size:16px;display:block;margin-bottom:6px}
-.ig-request-meta p{font-size:14px;color:#858b96;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin:0}
-.ig-unread{background:#ff304f;color:#fff;border-radius:20px;min-width:30px;height:30px;padding:0 8px;display:grid;place-items:center;font-size:13px;font-weight:700}
-.ig-request-detail{padding:24px 20px;display:flex;flex-direction:column;align-items:center;gap:12px}
-.ig-request-detail .ig-request-avatar{width:88px;height:88px;font-size:38px}
-.ig-request-detail p{text-align:center;color:#7e8792;font-size:14px;line-height:1.6}
-.ig-request-actions{display:flex;gap:9px;padding:12px 18px}
-.ig-request-actions button{flex:1;border-radius:10px;padding:12px 5px;background:#eff0f4;font-weight:650}
-.ig-request-actions button.primary{background:#405cff;color:white}
-
-/* Threads app */
-.threads-screen{background:#fff;color:#101114}.th-head{height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 17px;border-bottom:1px solid #f0f0f0;flex-shrink:0}.th-logo{font-size:25px;font-weight:800;letter-spacing:-1.2px}.th-head button,.th-nav button{background:none;color:#111;font-size:21px}.th-feed{flex:1;min-height:0;overflow:auto}.th-tabs{height:48px;display:flex;border-bottom:1px solid #eee;flex-shrink:0}.th-tabs button{flex:1;background:none;color:#8c8c91;font-size:13px;font-weight:650}.th-tabs button.active{color:#111;border-bottom:2px solid #111}.th-post{padding:15px 15px 12px;border-bottom:1px solid #eee;display:flex;gap:11px}.th-avatar{width:39px;height:39px;border-radius:50%;background:#e9e9ed;display:grid;place-items:center;font-size:17px;flex-shrink:0;color:#444}.th-content{min-width:0;flex:1}.th-meta{display:flex;gap:5px;align-items:center;font-size:12px;color:#929299}.th-meta b{color:#171719;font-size:13px}.th-more{margin-left:auto;background:none;color:#777;font-size:18px}.th-text{font-size:14px;line-height:1.6;margin:6px 0 10px;white-space:pre-wrap;overflow-wrap:anywhere}.th-actions{display:flex;justify-content:space-between;max-width:300px;color:#777}.th-actions button{background:none;color:#777;font-size:12px;padding:4px 7px 4px 0;display:flex;align-items:center;gap:5px}.th-actions button.liked{color:#e35b79}.th-compose{margin:10px 13px;padding:11px;border:1px solid #eee;border-radius:17px;display:flex;gap:10px;align-items:center;color:#888;font-size:13px}.th-compose button{background:#f4f4f4;border-radius:20px;padding:7px 14px;margin-left:auto;color:#333}.th-nav{height:54px;border-top:1px solid #eee;display:flex;align-items:center;justify-content:space-around;flex-shrink:0}.th-nav button{font-size:21px;color:#777}.th-nav button.active{color:#111}.th-compose-page{padding:16px;display:flex;gap:10px}.th-compose-page textarea{width:100%;height:150px;border:0;outline:0;resize:none;font:15px inherit}.th-primary{background:#111;color:white;border-radius:22px;padding:9px 18px;font-weight:700}.th-comment{padding:12px 0;border-bottom:1px solid #eee;font-size:13px;line-height:1.6}.th-comment b{margin-right:6px}.th-search{margin:12px 14px;padding:11px 14px;background:#f2f2f3;border-radius:12px;color:#888;font-size:13px}
 </style></head>
-<body><main id="phone"><div class="status"><span>9:41</span><span>●●●  ▰</span></div><div id="app" class="screen"></div><button class="home-indicator" type="button" aria-label="退出应用，返回手机桌面" title="点击返回手机桌面" onclick="exitToHome()"></button></main>
+<body><main id="phone"><div class="status"><span>9:41</span><span>●●●  ▰</span></div><div id="app" class="screen"></div><div class="home-indicator"></div></main>
 <script>
-(function(){
-'use strict';
-var names=['Shotaro','Eunseok','Sungchan','Wonbin','Sohee','Anton'];
-var cn=['将太郎','宋银硕','郑成灿','朴元彬','李炤熙','李灿荣'];
-var app=document.getElementById('app');
-var state={version:2,screen:'intro',me:'',lover:'',igHandle:'',chapter:0,trust:55,suspicion:12,public:15,igPosts:[],kktLog:[],handled:{},threadsPosts:[],choices:[],ending:''};
-var selectedMe='',selectedLover='';
-function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
-function save(){try{localStorage.setItem('riize_crisis_save_v2',JSON.stringify(state))}catch(e){}}
-function load(){try{var x=JSON.parse(localStorage.getItem('riize_crisis_save_v2'));if(x&&x.version===2)state=Object.assign(state,x)}catch(e){}}
+(()=>{
+const names=['Shotaro','Eunseok','Sungchan','Wonbin','Sohee','Anton'];
+const cn=['将太郎','宋银硕','郑成灿','朴元彬','李炤熙','李灿荣'];
+const $=s=>document.querySelector(s);
+const app=$('#app');
+let state={screen:'intro',me:'',lover:'',nickname:'',chapter:0,trust:50,suspicion:12,public:18,choices:[],dm:0,igPosts:0,ending:''};
+const save=()=>{try{localStorage.setItem('riize_crisis_save',JSON.stringify(state))}catch(e){}};
+const load=()=>{try{let x=JSON.parse(localStorage.getItem('riize_crisis_save'));if(x&&x.me)state=x}catch(e){}};
 function shell(cls,html){app.className='screen '+(cls||'');app.innerHTML=html}
-function btn(label,fn,cls){return '<button class="'+(cls||'choice')+'" onclick="'+fn+'">'+label+'</button>'}
-function top(title,back){return '<div class="top"><button onclick="go(\''+(back||'home')+'\')">‹ 返回</button><b>'+title+'</b><span style="width:42px"></span></div>'}
-function meName(){return cn[names.indexOf(state.me)]||'你'}
-function loverName(){return cn[names.indexOf(state.lover)]||'他'}
-window.go=function(s){state.screen=s;save();render()};
-window.exitToHome=function(){if(state.me&&state.lover){go('home')}else{go('intro')}};
-function intro(){shell('intro','<div class="eyebrow">A FICTIONAL RIIZE FAN SIMULATOR</div><div><h1>恋爱危机，<br>从一张照片开始。</h1><p>你是 RIIZE 的一位成员，正在和另一位成员秘密恋爱。</p><p>你们小心隐藏关系，却还是留下了同款衣服、配饰、一起上下班等细节。粉丝开始讨论，站姐也逐渐注意到你的 IG 小号。</p><p>所有内容均为虚构互动剧情。你的选择将影响关系、怀疑程度和粉圈舆论。</p></div><button class="btn-dark" onclick="go(\'setup\')">开始新的故事　→</button><div class="eyebrow">FICTIONAL FAN-MADE STORY · NOT REAL EVENTS</div>')}
-function setup(){
- var members=names.map(function(n,i){return '<button class="member '+(selectedMe===n?'active':'')+'" onclick="pickMe(\''+n+'\')"><strong>'+cn[i]+'</strong><small>'+n+'</small></button>'}).join('');
- var partners=names.filter(function(n){return n!==selectedMe}).map(function(n){var i=names.indexOf(n);return '<button class="love '+(selectedLover===n?'active':'')+'" onclick="pickLover(\''+n+'\')"><b>'+cn[i]+'</b><small style="display:block;color:#999;margin-top:4px">'+n+'</small></button>'}).join('');
- shell('setup','<div class="brand">우리 사이 <span class="muted" style="font-size:12px">· RIIZE</span></div><p class="sub">这一次，你不是圈外人。你就是 RIIZE 的其中一位成员。</p><div class="section">01 / 选择你扮演的成员</div><div class="members">'+members+'</div><div class="section">02 / 选择秘密恋爱对象</div><p class="hint">只能选择其他五位成员，开启专属关系线。</p><div class="love-grid">'+partners+'</div><div class="section">03 / 设置你的 IG 小号</div><input class="field" id="igHandle" placeholder="IG 小号用户名（例如：afterglow_）" value="'+esc(state.igHandle)+'"><p class="hint">你可以使用虚构用户名；之后会在 IG、Threads 和站姐私信中出现。</p><button class="btn-dark" onclick="startStory()">确认身份，进入手机　→</button>');
+function top(title,back='home'){return `<div class="top"><button onclick="go('${back}')">‹ 返回</button><b>${title}</b><span style="width:42px"></span></div>`}
+window.go=(s)=>{state.screen=s;save();render()};
+function intro(){shell('intro',`<div class="eyebrow">A FICTIONAL RIIZE FAN SIMULATOR</div><div><h1>恋爱危机，<br>从一张照片开始。</h1><p>你将扮演 RIIZE 的其中一位成员，并与另一位成员秘密恋爱。你们把恋爱藏在日常细节里——同款衣服、下班后的同行、只有彼此看得懂的照片。</p><p>直到某天，粉丝开始察觉不对劲。站姐的小号也向你发来了私信。</p><p>你的每个选择，都会改变恋情、粉圈舆论与故事结局。</p></div><button class="btn-dark" onclick="go('setup')">开始故事　→</button><div class="eyebrow">ALL CHARACTERS ARE USED IN A FICTIONAL FAN STORY</div>`)}
+function setup(){shell('setup',`<div class="brand">우리 사이 <span class="muted" style="font-size:12px">· RIIZE</span></div><p class="sub">先决定你是谁，以及你想和谁展开这条故事线。</p><div class="section">01 / 选择你的成员身份</div><div class="members">${names.map((n,i)=>`<button class="member ${state.me===n?'active':''}" onclick="pickMe('${n}')"><strong>${cn[i]}</strong><small>${n}</small></button>`).join('')}</div><div class="section">02 / 选择恋爱对象</div><div class="love-grid">${names.map((n,i)=>`<button class="love ${state.lover===n?'active':''}" ${state.me===n?'disabled':''} onclick="pickLover('${n}')">${cn[i]} <span class="muted">· ${n}</span></button>`).join('')}</div><div class="section">03 / 你的称呼（可选）</div><input class="field" id="nickname" placeholder="例如：我的小号昵称" value="${esc(state.nickname)}"><p class="hint">故事采用虚构情节与虚构社交账号内容。选择身份后，恋爱对象会自动排除你自己。</p><button class="btn-dark" onclick="startStory()">确认设定，进入手机　→</button>`);
 }
-window.pickMe=function(n){selectedMe=n;state.me=n;if(selectedLover===n)selectedLover='';setup()};
-window.pickLover=function(n){selectedLover=n;state.lover=n;setup()};
-window.startStory=function(){var el=document.getElementById('igHandle');if(!selectedMe||!selectedLover){alert('请先选择扮演成员和恋爱对象。');return}state.me=selectedMe;state.lover=selectedLover;state.igHandle=(el&&el.value.trim().replace(/^@/,''))||'afterglow_'+selectedMe.toLowerCase();state.version=2;state.chapter=0;state.trust=55;state.suspicion=12;state.public=15;state.igPosts=[];state.kktLog=[];state.handled={};state.threadsPosts=[];state.choices=[];state.ending='';state.screen='home';save();render()};
-function home(){
- var apps=[['🗨️','KKT','kkt'],['𝕏','X','x'],['◎','Instagram','ig'],['📷','相册','photos'],['📅','行程','schedule'],['📝','备忘录','notes'],['💬','LYSN','lysn'],['🧵','Threads','threads'],['♡','关系状态','status'],['✉️','私信请求','inbox']];
- var grid=apps.map(function(a){return '<button class="appcell" onclick="go(\''+a[2]+'\')"><div class="appicon">'+a[0]+'</div><span>'+a[1]+'</span></button>'}).join('');
- shell('home','<div class="scroll home"><div style="display:flex;justify-content:space-between;font-size:12px;color:#655d62"><b>MONDAY · 09:41</b><span>♡ RIIZE 私人手机</span></div><div class="widget"><small>RIIZE · SEOUL</small><div class="time">09:41</div><div style="display:flex;justify-content:space-between"><span>多云转晴　☁</span><small>今天也要小心一点。</small></div></div><div class="appgrid">'+grid+'</div><div class="home-title">TODAY\'S NOTE</div><div class="storycard"><b>'+meName()+' × '+loverName()+' · 秘密关系</b><p>你们已经约定暂时不公开恋情。最近的同款穿搭和下班时间，似乎开始引起注意。</p><p>当前阶段：'+['平静日常','粉丝开始怀疑','IG 小号留下线索','站姐发来私信','粉圈争论升级'][Math.min(state.chapter,4)]+'</p></div><button class="btn-light" onclick="restart()">重新开始 / 更换身份</button></div>');
-}
-function xData(){
- var m=meName(),l=loverName();
- var base=[
- ['stage_fan01','今天舞台直拍太绝了！两个人今天的状态都很好ㅠㅠ'],
- ['moodboard_021','有没有人觉得'+m+'和'+l+'最近穿搭有点像？这件外套已经是第二次撞款了吧。'],
- ['bluehour_17','同款而已吧，成员之间借衣服不是很正常吗？不要什么都往恋爱上扯。'],
- ['archive_frame','昨天两个人几乎同一时间下班，而且上车前还在说话……我先观望。'],
- ['only_riize','嗑 CP 可以，但不要把猜测当事实，更不要去扒成员的私人账号。']
- ];
- if(state.chapter>=1)base.unshift(['filmroll_88','最近'+m+'和'+l+'真的有点奇怪……同款配饰、眼神互动，还有一起上下班？']);
- if(state.chapter>=2)base.unshift(['anon投稿','有人说看到一个疑似成员的小号发了约会照片，照片里只拍到手和衣服一角。']);
- if(state.chapter>=3)base.unshift(['lens_archive','有站姐似乎在整理公开行程的时间线，但希望不要有人去跟车或曝光私人信息。']);
- if(state.chapter>=4)base.unshift(['trend_watch','相关话题讨论量上升。提醒：目前没有任何得到证实的消息，请尊重成员隐私。']);
- return base
-}
-function xscreen(){
- var posts=xData().map(function(p,i){return '<div class="x-feed-post"><div class="x-feed-avatar">'+esc(p[0].slice(0,1).toUpperCase())+'</div><div class="x-feed-content"><div class="x-feed-meta"><b>@'+esc(p[0])+'</b>　· '+(i+1)+'小时</div><div class="x-feed-text">'+esc(p[1])+'</div><div class="x-feed-meta" style="margin-top:9px">♡ '+(120+i*83)+'　↻ '+(18+i*21)+'　◯ '+(32+i*13)+'</div><button class="choice" onclick="xDiscuss('+i+')">查看评论区 / 参与讨论</button></div></div>'}).join('');
- shell('xscreen','<div class="x-topline"><span class="x-userpic">♡</span><div class="x-logo">𝕏</div><span class="x-spacer"></span></div><div class="x-tabs"><button class="active">为你推荐</button><button>正在关注</button><button>热搜</button></div><div class="x-feed">'+posts+'</div>');
-}
-window.xDiscuss=function(i){var options=['只是关系好的队友，不要过度解读。','我也觉得最近有点频繁，但还是先不要下结论。','请不要传播未经证实的私生活猜测。','我只想看舞台，不想参与这些讨论。'];showModal('粉丝讨论 · '+meName()+' × '+loverName(),options.map(function(x){return '• '+x}).join('\n')+' \n\n你准备以怎样的心态看待这场讨论？',[{t:'理性观望',f:function(){state.trust=Math.min(100,state.trust+2);state.choices.push('理性看待X讨论');save();xscreen()}},{t:'查看下一条',f:function(){xscreen()}}])};
-function igNav(active){return '<div class="ig-bottom"><button onclick="go(\'ig\')">⌂</button><button onclick="go(\'x\')">⌕</button><button onclick="igCreate()">＋</button><button onclick="go(\'inbox\')">♡</button><button onclick="igProfile()">♙</button></div>'}
-function ig(){
- var user=esc(state.igHandle||'afterglow');
- var own=state.igPosts.map(function(p,i){return '<article class="ig-post"><div class="ig-post-head"><div class="ig-avatar">♡</div><div><div class="ig-post-user">'+user+'</div><div class="ig-post-loc">Seoul, Korea</div></div></div><div class="ig-post-image '+(p.type==='meal'?'food':p.type==='duo'?'duo':'')+'"><span class="ig-image-label">'+esc(p.label)+'</span></div><div class="ig-post-actions"><span>♡</span><span>◯</span><span>↗</span></div><div class="ig-caption"><b>'+user+'</b> '+esc(p.caption)+'</div><div class="ig-comments">查看全部评论</div></article>'}).join('');
- var starter=state.igPosts.length?'':'<div class="storycard"><b>你的 IG 小号</b><p>这里是只有少数人知道的私人账号。你可以分享约会餐桌、他的衣服一角、手部特写或背影。每次发布都可能留下线索。</p><button class="choice" onclick="igCreate()">发布第一条动态</button></div>';
- shell('igscreen','<div class="ig-header"><button class="ig-head-icon" onclick="igCreate()">＋</button><div class="ig-wordmark">Instagram⌄</div><button class="ig-head-icon" onclick="go(\'inbox\')">♡</button></div><div class="ig-stories"><button class="ig-story self" onclick="igProfile()"><div class="ig-story-ring"><div class="ig-story-inner">●</div></div>你的快拍</button><button class="ig-story"><div class="ig-story-ring"><div class="ig-story-inner">🐶</div></div>daily</button><button class="ig-story"><div class="ig-story-ring"><div class="ig-story-inner">♡</div></div>friends</button><button class="ig-story"><div class="ig-story-ring"><div class="ig-story-inner">RIIZE</div></div>RIIZE</button></div><div class="ig-feed">'+starter+own+'</div>'+igNav('home'));
-}
-window.igCreate=function(){shell('igscreen','<div class="top"><button onclick="go(\'ig\')">取消</button><b>新建动态</b><span></span></div><div class="scroll" style="padding:18px"><p class="section">选择你想发布的照片内容</p>'+['他的手部特写','他的衣服一角','一起吃饭的餐桌','两个人的背影'].map(function(x,i){return '<button class="choice" onclick="igDraft('+i+')">'+x+'</button>'}).join('')+'</div>')};
-window.igDraft=function(i){var labels=['照片只拍到他的手，袖口和熟悉的手链也入镜了。','镜头边缘出现了他的外套一角。','两套餐具和对面那杯饮料，像是一场普通约会。','没有拍到脸，只留下并肩走路的背影。'];var captions=['今天的时间留给喜欢的人。','他的衣服又被我借走了。','晚餐和某个人。','不需要露脸的纪念。'];showModal('发布到私人小号',labels[i]+'\n\n这条动态可能被熟人看到，也可能成为粉丝猜测的线索。',[{t:'发布',f:function(){state.igPosts.unshift({type:['hand','cloth','meal','duo'][i],label:labels[i],caption:captions[i]});state.chapter=Math.max(state.chapter,2);state.suspicion=Math.min(100,state.suspicion+8+(i===2?2:0));state.public=Math.min(100,state.public+4);state.choices.push('IG发布：'+captions[i]);save();ig()}},{t:'再想想',f:function(){igCreate()}}])};
-window.igProfile=function(){shell('igscreen','<div class="ig-profile-top"><span>‹</span><b>'+esc(state.igHandle)+'</b><span>☰</span></div><div class="ig-profile-head"><div class="ig-profile-avatar">♡</div><div class="ig-profile-stats"><span><b>'+state.igPosts.length+'</b>帖子</span><span><b>128</b>粉丝</span><span><b>86</b>关注</span></div></div><div class="ig-bio"><b>'+esc(state.igHandle)+'</b><br>private moments ✧</div><div class="ig-profile-buttons"><button onclick="igCreate()">编辑 / 发布</button><button onclick="go(\'inbox\')">消息</button></div><div class="ig-grid">'+state.igPosts.map(function(p){return '<div class="ig-grid-tile">♡</div>'}).join('')+'</div>'+igNav('profile'))};
-function inbox(){
- var messages=[['lens.archive_02','你好，我想确认一件事。你是'+meName()+'本人吗？'],['framebyframe_','你是不是在和'+loverName()+'谈恋爱？最近有些照片的细节很像。'],['private_camera9','我拍到的公开行程里，你们出现的时间总是很接近。可以聊聊吗？']];
- shell('igscreen','<div class="ig-inbox-head"><div class="ig-inbox-name">'+esc(state.igHandle)+'　⌄</div><div class="ig-inbox-actions"><button>⌕</button></div></div><div class="ig-inbox-section"><span>消息请求</span><button>陌生账号 · '+messages.length+'</button></div><div class="scroll" style="padding:14px">'+messages.map(function(m,i){return '<button class="choice" onclick="openRequest('+i+')"><b>'+m[0]+'</b><p>'+m[1]+'</p></button>'}).join('')+'</div>'+igNav('dm'));
-}
-window.openRequest=function(i){var m=[['lens.archive_02','你好，我想确认一件事。你是'+meName()+'本人吗？'],['framebyframe_','你是不是在和'+loverName()+'谈恋爱？最近有些照片的细节很像。'],['private_camera9','我拍到的公开行程里，你们出现的时间总是很接近。可以聊聊吗。']][i];state.handled[i]=true;showModal('来自 '+m[0]+' 的私信',m[1],[{t:'回复对方',f:function(){state.suspicion=Math.min(100,state.suspicion+9);state.chapter=Math.max(state.chapter,3);state.choices.push('回复站姐小号');save();showModal('你回复了','你没有承认关系，只说希望对方不要继续打探私人生活。',[{t:'返回收件箱',f:function(){inbox()}}])}},{t:'不回复',f:function(){state.choices.push('没有回复站姐');save();inbox()}},{t:'截图发给恋人',f:function(){state.trust=Math.min(100,state.trust+7);state.kktLog.push({from:'me',text:'我收到一个陌生账号的私信，问我是不是在和你谈恋爱。我截图给你了。'});state.choices.push('把站姐私信告诉恋人');save();go('kkt')}}])};
-function kkt(){
- var log=state.kktLog.length?state.kktLog:[{from:'lover',text:'今天练习结束得比较晚。你回宿舍了吗？'},{from:'me',text:'刚回来。今天差点在走廊被工作人员撞见。'},{from:'lover',text:'下次我们小心一点。真的很想见你。'}];
- shell('kkt-page','<div class="kkt-head"><h2>KakaoTalk</h2><div class="kkt-actions"><button>⌕</button><button>＋</button></div></div><div class="kkt-section-title">聊天</div><div class="kkt-chatrow" onclick="go(\'loverchat\')"><div class="kkt-avatar">♡</div><div class="chat-meta"><b>'+loverName()+'</b><p>'+esc(log[log.length-1].text)+'</p></div><span class="chat-time">刚刚</span></div><div class="kkt-divider"></div><div class="kkt-section-title">与恋人的秘密聊天室</div><button class="choice" onclick="go(\'loverchat\')">打开和 '+loverName()+' 的聊天　→</button><div class="kkt-bottom"><button class="active"><strong>●</strong>朋友</button><button><strong>◯</strong>聊天</button><button><strong>♙</strong>更多</button></div>');
-}
-window.sendKktChoice=function(i){var opts=['我也想你。等行程结束后，我们找时间见面吧。','最近有人开始讨论我们了，你也看到了吗？','我有点担心。我们是不是应该暂时减少一起出现的次数？'];var t=opts[i];state.kktLog.push({from:'me',text:t});var answer=['我也想你。再忙也会留时间给你。','看到了。先别慌，我们一起想办法，不要一个人承担。','好，我们先谨慎一点，但不要因为别人的猜测就互相疏远。'][i];state.kktLog.push({from:'lover',text:answer});state.trust=Math.min(100,state.trust+(i===1?8:5));state.choices.push('KKT选择：'+t);if(i===1)state.chapter=Math.max(state.chapter,2);save();loverchat()};
-function loverchat(){
- var log=state.kktLog.length?state.kktLog:[{from:'lover',text:'今天好想见你。刚刚看到你发的 IG 了ㅋㅋ 那张照片拍得很可爱。'},{from:'me',text:'差点就把你拍进去了。下次要小心一点。'}];
- var msgs=log.map(function(m){return '<div class="kkt-chat-line '+(m.from==='me'?'mine':'')+'">'+(m.from==='me'?'':'<div class="kkt-mini">♡</div>')+'<div class="kkt-bubble">'+esc(m.text)+'</div></div>'}).join('');
- var choices=state.chapter<4?'<div class="kkt-replybox"><small>选择你的回复</small><button class="choice" onclick="sendKktChoice(0)">我也想你，想快点见到你。</button><button class="choice" onclick="sendKktChoice(1)">有人开始怀疑我们了，我有点担心。</button><button class="choice" onclick="sendKktChoice(2)">最近先小心一点，减少一起出现的机会吧。</button></div>':'<div class="kkt-replybox"><small>你们已经认真谈过这件事。</small><button class="choice" onclick="go(\'status\')">查看关系与结局走向</button></div>';
- shell('kkt-chat-screen','<div class="kkt-chat-head"><button onclick="go(\'kkt\')">‹</button><b>'+loverName()+'</b><button>⋯</button></div><div class="kkt-chat-body"><div class="kkt-chat-date">今天 · 22:16</div>'+msgs+'</div>'+choices);
-}
+window.pickMe=n=>{state.me=n;if(state.lover===n)state.lover='';setup()};
+window.pickLover=n=>{state.lover=n;setup()};
+window.startStory=()=>{state.nickname=$('#nickname').value.trim()||'private';if(!state.me||!state.lover){alert('请先选择成员身份和恋爱对象。');return}state.screen='home';state.chapter=0;save();render()};
+function home(){shell('home',`<div class="scroll home"><div style="display:flex;justify-content:space-between;font-size:12px;color:#655d62"><b>MONDAY, 09:41</b><span>♡ 你的私人手机</span></div><div class="widget"><small>오늘의 날씨 · SEOUL</small><div class="time">09:41</div><div style="display:flex;justify-content:space-between"><span>多云转晴　☁</span><small>今天也要小心一点。</small></div></div><div class="appgrid">
+${[['💬','KKT','line'],['𝕏','X','x'],['◎','Instagram','ig'],['📷','相册','photos'],['📅','日程','schedule'],['📝','备忘录','notes'],['💌','LYSN','lysn'],['🧵','Threads','threads'],['📩','陌生私信','dm'],['♡','关系状态','status']].map(a=>`<button class="appcell" onclick="go('${a[2]}')"><div class="appicon">${a[0]}</div><span>${a[1]}</span></button>`).join('')}
+</div><div class="home-title">TODAY'S NOTE</div><div class="storycard"><b>今天的行程</b><p>10:30 团体练习　/　14:00 拍摄　/　晚上：自由时间<br>经纪人提醒：最近上下班尽量不要单独行动。</p></div><div class="dock"><button class="appcell" onclick="go('line')"><div class="appicon">💬</div></button><button class="appcell" onclick="go('x')"><div class="appicon">𝕏</div></button><button class="appcell" onclick="go('ig')"><div class="appicon">◎</div></button><button class="appcell" onclick="go('dm')"><div class="appicon">📩</div></button></div></div>`)}
+function line(){shell('',`${top('KKT · 聊天','home')}<div class="scroll"><div class="xpost"><div class="avatar">经</div><div><b>经纪人</b><div class="muted" style="font-size:11px">今天 08:52</div><p class="postbody">最近网上有一些关于成员关系的讨论。你们几个注意一下上下班动线，不要给拍摄者留下容易误会的画面。</p></div></div><div class="xpost" onclick="go('loverchat')"><div class="avatar">♡</div><div style="flex:1"><b>${cn[names.indexOf(state.lover)]}</b><p class="postbody muted">点开与恋人的聊天记录……</p></div><span class="muted">09:12</span></div><div class="xpost"><div class="avatar">队</div><div><b>RIIZE 群聊</b><p class="postbody">今天练习结束后一起吃饭吗？</p></div></div></div>`)}
+function loverchat(){shell('chatbg',`${top(cn[names.indexOf(state.lover)]+' · LINE','line')}<div class="chatmsgs" id="msgs"><div class="date">今天 09:12</div><div class="msg"><div class="bubble">你看到网上那些帖子了吗？好像有人在说我们最近总穿一样的衣服。</div></div><div class="msg me"><div class="bubble">看到了……应该只是巧合吧。</div></div><div class="msg"><div class="bubble">嗯。但昨天一起下班的照片，好像也被拍到了。</div></div></div><div class="choices"><small>你要怎么回复？</small><button class="choice" onclick="replyLover(0)">「先别担心，我会注意的。」<br><span class="muted">安抚对方，维持信任</span></button><button class="choice" onclick="replyLover(1)">「最近暂时不要一起走了。」<br><span class="muted">降低曝光，但可能让对方失落</span></button><button class="choice" onclick="replyLover(2)">「要不然我们公开吧？」<br><span class="muted">大胆表达，风险也会增加</span></button></div>`)}
+window.replyLover=i=>{if(i===0)state.trust+=8;if(i===1){state.suspicion-=4;state.trust-=5}if(i===2){state.trust+=3;state.suspicion+=18;state.public+=12}state.choices.push('恋人回复'+i);state.chapter=1;save();go('x')};
+const posts=[
+['dailyriize','@dailyriize','今天刷到一个细节……他们两个最近是不是有点奇怪？昨天机场图里外套颜色也太像了吧。','♡ 2,431　↻ 381'],
+['bluehour','@bluehour','同款衣服而已吧？成员之间关系好、穿搭互相影响不是很正常吗，别什么都往恋爱上扯。','♡ 1,208　↻ 96'],
+['archive_02','@archive_02','不是只有衣服啊……上周两个人几乎同一时间下班，而且走的方向也一样。真的只是巧合？','♡ 3,098　↻ 622'],
+['alwaysriize','@alwaysriize','拜托，嗑CP不要嗑到现实里。没有证据就不要造谣，也别去打扰成员本人。','♡ 4,821　↻ 703'],
+['framebyframe','@framebyframe','站姐图里有一张反光，感觉像是两个人一起坐车？我不确定，先放大看看。','♡ 5,620　↻ 1,104']
+];
+function xscreen(){let arr=posts.slice(0,Math.min(2+state.chapter,5));shell('xscreen',`${top('𝕏　为你推荐','home')}<div class="scroll"><div style="padding:12px 16px;border-bottom:1px solid #eee;font-weight:750">正在发生的讨论 <span class="muted" style="font-size:11px;font-weight:400">· 虚构时间线</span></div>${arr.map((p,i)=>`<div class="xpost"><div class="avatar">${p[0][0].toUpperCase()}</div><div style="flex:1"><div class="who"><b style="color:#17181c">${p[0]}</b> ${p[1]} · ${i+1}小时</div><div class="body">${p[2]}</div><div class="stats">♡ ${p[3]}</div></div></div>`).join('')}<div class="storycard"><b>讨论热度</b><div class="meter"><i style="width:${Math.min(100,state.suspicion)}%"></i></div><p>目前猜测热度：${state.suspicion}/100。你可以选择继续观察，或处理私人账号与站姐私信。</p></div></div><div class="choices"><small>接下来你想做什么？</small><button class="choice" onclick="go('ig')">查看自己的 Instagram 小号</button><button class="choice" onclick="go('dm')">查看陌生账号的私信请求</button><button class="choice" onclick="go('photos')">回看最近被讨论的照片线索</button><button class="choice" onclick="nextChapter()">继续下一阶段 →</button></div>`)}
+function ig(){shell('',`${top('Instagram','home')}<div class="scroll igprofile"><div class="ighead"><div class="igbig">♡</div><div style="flex:1"><b>${esc(state.nickname)}</b><div class="igstats"><span><b>${state.igPosts}</b>帖子</span><span><b>218</b>粉丝</span><span><b>106</b>关注</span></div></div></div><div class="igbio">just little moments ♡<br>private account · only close friends</div><div style="border-top:1px solid #eee;padding:12px 0;font-size:12px;font-weight:700">帖子　　已标记</div><div class="iggrid"><button class="igphoto" onclick="postIG(0)">☕<small>咖啡杯</small></button><button class="igphoto" onclick="postIG(1)">🧥<small>他的外套一角</small></button><button class="igphoto" onclick="postIG(2)">🤍<small>交叠的手</small></button><button class="igphoto" onclick="postIG(3)">🌃<small>夜晚的街道</small></button><button class="igphoto" onclick="postIG(4)">🍰<small>两人份甜点</small></button><button class="igphoto" onclick="postIG(5)">🚘<small>车窗倒影</small></button></div><p class="hint">点选一张照片，决定要不要发布到小号。照片内容为文字/色块示意。</p></div>`)}
+window.postIG=i=>{let desc=['一杯咖啡，对面的人没有入镜。','只拍到了他的外套袖口。','照片里出现了两个人的手。','一起走过的夜路。','两份甜点，只有一张桌面。','车窗反光里似乎有另一个人。'][i];showModal('发布这条动态？',`你的照片内容：${desc}<br><br>如果被熟悉你们的人看到，可能会成为新的恋爱线索。`,[{t:'发布到小号',f:()=>{state.igPosts++;state.suspicion+=i===2?13:7;state.public+=4;save();go('ig')}},{t:'先不发布',f:()=>go('ig')}])};
+function dm(){shell('',`${top('消息请求','home')}<div class="scroll"><div class="xpost"><div class="avatar">?</div><div style="flex:1"><b>unknown_0821</b><div class="muted" style="font-size:11px">Instagram · 2小时前</div><p class="postbody">你好……你是 ${cn[names.indexOf(state.me)]} 吗？</p><button class="choice" onclick="openDM()">查看消息请求</button></div></div><div class="storycard"><b>陌生账号提醒</b><p>对方没有关注你，但发来了消息。接受后，对方可能知道你已读。</p></div></div>`)}
+function openDM(){shell('',`${top('unknown_0821 · 私信','dm')}<div class="chatmsgs chatbg"><div class="date">今天 14:06</div><div class="msg"><div class="bubble">你好，冒昧打扰了。你是 ${cn[names.indexOf(state.me)]} 吗？</div></div><div class="msg"><div class="bubble">我关注你们很久了。最近你和 ${cn[names.indexOf(state.lover)]} 是不是在交往？同款衣服、一起上下班，还有你小号的照片……我好像发现了一些事情。</div></div></div><div class="choices"><small>站姐小号正在等待你的回复</small><button class="choice" onclick="dmReply(0)">「你认错人了。」<br><span class="muted">否认身份，可能引起追问</span></button><button class="choice" onclick="dmReply(1)">「请不要传播没有证实的内容。」<br><span class="muted">设立边界，语气冷静</span></button><button class="choice" onclick="dmReply(2)">「你想要什么？」<br><span class="muted">直接试探对方目的</span></button><button class="choice" onclick="dmReply(3)">不回复，截图保存并联系经纪人。<br><span class="muted">保护自己，减少正面冲突</span></button></div>`)}
+window.dmReply=i=>{state.dm=i;if(i===0)state.suspicion+=8;if(i===1)state.suspicion-=2;if(i===2)state.suspicion+=3;if(i===3){state.suspicion-=5;state.trust+=2}state.choices.push('站姐私信'+i);save();showModal('消息已处理', ['你否认了身份。对方没有立刻相信，继续发来一句「真的不是你吗？」','你明确表达了边界。对方暂时停止追问。','对方回复：「我只是想确认，不会随便公开。」','你保存了截图，并把情况告诉了经纪人。'][i], [{t:'继续',f:()=>nextChapter()}])};
 function threads(){
- var seeds=[['@moodboard_021','同款衣服而已，成员之间互相借衣服很正常吧。'],['@cp_archive','我不是说他们一定在谈，但最近互动真的很有氛围。'],['@stay_real','嗑 CP 不等于可以侵犯隐私。不要去搜私人账号。'],['@bluehour','如果只是关系好，希望大家不要过度解读；如果是真的，也希望他们幸福。']];
- var all=(state.threadsPosts||[]).map(function(p){return [p.user,p.text]}).concat(seeds);
- shell('threads-screen','<div class="th-head"><button onclick="go(\'home\')">‹</button><div class="th-logo">Threads</div><button onclick="threadsCompose()">＋</button></div><div class="th-tabs"><button class="active">为你推荐</button><button>正在关注</button></div><div class="th-feed">'+all.map(function(p,i){return '<article class="th-post"><div class="th-avatar">✧</div><div class="th-content"><div class="th-meta"><b>'+esc(p[0])+'</b><span> · '+(i+1)+'小时</span></div><div class="th-text">'+esc(p[1])+'</div><div class="th-actions"><button>♡ '+(23+i*12)+'</button><button>◯ 回复</button><button>⇄ 转发</button></div></div></article>'}).join('')+'</div><div class="th-nav"><button class="active" onclick="threads()">⌂</button><button onclick="threadsCompose()">＋</button><button onclick="go(\'inbox\')">♡</button><button>♙</button></div>');
+const feed=[
+['@framebyframe','最近同款衣服的讨论又出现了。只是穿搭相似，真的能说明什么吗？'],
+['@bluehour','我觉得大家可以讨论舞台互动，但不要把成员的私人生活当成侦探游戏。'],
+['@archive_02','两个人最近确实常常在差不多的时间离开公司，不过也可能只是行程重叠。'],
+['@staywithriize','不管关系是什么，都希望大家先尊重他们。没有证据就不要传播。']
+];
+if(state.chapter>=2)feed.unshift(['@quiet_signal','有人在讨论一个私人账号发出的照片。请不要转发、扒号或尝试确认账号主人。']);
+if(state.chapter>=3)feed.unshift(['@lens_note','有账号私信询问成员身份和恋爱关系了。希望不要有人继续越界。']);
+shell('',`${top('Threads','home')}<div class="thread-head"><span>Threads</span><button onclick="threadCompose()">＋</button></div><div class="thread-tabs"><span>为你推荐</span><span>正在关注</span></div><div class="scroll">${feed.map((p,i)=>`<div class="thread-post"><div class="thread-avatar">✧</div><div class="thread-body"><div class="thread-meta"><b>${p[0]}</b> · ${i+1}小时</div>${esc(p[1])}<div class="thread-actions"><button onclick="threadReact(${i})">♡ 喜欢</button><button onclick="threadReact(${i})">◯ 回复</button><button onclick="threadReact(${i})">↗ 转发</button></div></div></div>`).join('')}<div class="storycard"><b>话题讨论</b><p>关于 ${cn[names.indexOf(state.me)]} 和 ${cn[names.indexOf(state.lover)]} 的猜测仍未得到证实。粉丝立场不同，但请勿侵犯隐私。</p></div></div>`);
 }
-window.threadsCompose=function(){shell('threads-screen','<div class="th-head"><button onclick="threads()">取消</button><div class="th-logo">新建帖子</div><button onclick="threadsPublish()">发布</button></div><div style="padding:18px"><textarea id="threadDraft" class="field" rows="5" placeholder="记录一下今天的心情……"></textarea></div>')};
-window.threadsPublish=function(){var el=document.getElementById('threadDraft');if(!el||!el.value.trim())return;state.threadsPosts.unshift({user:'@'+state.igHandle,text:el.value.trim()});state.choices.push('发布 Threads');save();threads()};
-function status(){
- var bars=[['关系信任',state.trust],['站姐怀疑',state.suspicion],['粉圈热度',state.public]];
- var html=bars.map(function(b){return '<div style="margin:18px 0"><div style="display:flex;justify-content:space-between;font-size:13px"><b>'+b[0]+'</b><span>'+b[1]+'/100</span></div><div class="meter"><i style="width:'+b[1]+'%"></i></div></div>'}).join('');
- shell('screen','<div class="top"><button onclick="go(\'home\')">‹ 返回</button><b>关系状态</b><span></span></div><div class="scroll" style="padding:20px"><div class="storycard"><b>'+meName()+' × '+loverName()+'</b><p>你们的关系仍然处于秘密状态。每一次公开互动、每一张小号照片和每一次私信回复，都会影响接下来的走向。</p></div>'+html+'<div class="section">当前剧情进度</div><p class="hint">第 '+(state.chapter+1)+' 阶段 · '+['秘密日常','粉丝出现怀疑','IG 小号留下线索','站姐私信调查','粉圈争论与关系抉择'][Math.min(state.chapter,4)]+'</p><button class="btn-dark" onclick="advanceStory()">推进下一阶段</button><button class="btn-light" style="margin-top:9px" onclick="getEnding()">查看当前结局倾向</button></div>');
-}
-window.advanceStory=function(){state.chapter=Math.min(4,state.chapter+1);state.public=Math.min(100,state.public+9);state.suspicion=Math.min(100,state.suspicion+6);state.choices.push('推进剧情阶段');save();showModal('新的风波出现了',['X 上出现同款穿搭对比帖。','粉丝开始把一起上下班的时间整理成时间线。','IG 小号的一张照片被陌生账号截图。','站姐的小号发来更直接的私信。','不同立场的粉丝开始争论：只是队友，还是关系不一般？'][state.chapter],[{t:'继续',f:function(){go(['x','x','ig','inbox','threads'][state.chapter])}}])};
-window.getEnding=function(){var title,desc;if(state.suspicion>=72||state.public>=78){title='风暴中心';desc='猜测迅速扩散，你们决定暂时减少公开互动，先保护彼此。'}else if(state.trust>=68&&state.suspicion<48){title='默契守护';desc='你们及时沟通、互相信任，暂时没有让线索变成确凿证据。'}else if(state.public>=45){title='未证实的传闻';desc='粉圈讨论持续，但不同立场仍在争论，没有人能确认真相。'}else{title='平静的秘密';desc='目前没有引起太多注意，你们决定继续谨慎相处。'}state.ending=title;save();showModal('结局倾向 · '+title,desc,[{t:'回到手机',f:function(){go('home')}},{t:'查看状态',f:function(){status()}}])};
-function showModal(title,body,actions){var box=document.createElement('div');box.className='modalback';box.innerHTML='<div class="modal"><h3>'+esc(title)+'</h3><p>'+esc(body).replace(/\n/g,'<br>')+'</p>'+(actions||[]).map(function(a,i){return '<button class="'+(i===0?'btn-dark':'btn-light')+'" style="width:100%" data-act="'+i+'">'+esc(a.t)+'</button>'}).join('')+'</div>';app.appendChild(box);box.querySelectorAll('[data-act]').forEach(function(b){b.addEventListener('click',function(){var a=actions[Number(b.getAttribute('data-act'))];box.remove();if(a&&a.f)a.f()})})}
-function schedule(){shell('screen',top('今日行程')+'<div class="scroll" style="padding:18px"><div class="storycard"><b>09:30　团体练习</b><p>与成员一起练习新舞台。你和'+loverName()+'需要注意镜头和工作人员。</p></div><div class="storycard"><b>14:00　个人录音</b><p>分组工作，暂时不会和恋人单独见面。</p></div><div class="storycard"><b>19:20　结束行程</b><p>你们约好错开几分钟离开练习室。</p></div><button class="choice" onclick="advanceStory()">查看今天之后发生的事</button></div>')}
-function notes(){shell('screen',top('备忘录')+'<div class="scroll" style="padding:18px"><div class="storycard"><b>不要忘记</b><p>1. 不要在公开账号发同框照片。<br>2. 小号发图前检查背景和反光。<br>3. 如果收到可疑私信，先和'+loverName()+'商量。<br>4. 不要让粉丝的猜测影响你们之间的信任。</p></div></div>')}
-function photos(){shell('screen',top('相册')+'<div class="scroll" style="padding:18px"><div class="ig-grid">'+state.igPosts.map(function(p){return '<div class="ig-grid-tile">♡</div>'}).join('')+'</div><p class="hint">这里保存着你发布过的私人照片记录。</p></div>')}
-function lysn(){shell('screen',top('LYSN')+'<div class="scroll" style="padding:18px"><div class="storycard"><b>Dear. '+loverName()+'</b><p>今天辛苦了。练习结束之后，记得好好吃饭。不要因为网上的讨论就睡不着。</p><p>그리고 보고 싶어 ♡</p><button class="choice" onclick="go(\'kkt\')">去 KKT 回复他</button></div></div>')}
-function restart(){if(!confirm('确定清除当前新剧情存档并重新选择身份吗？'))return;localStorage.removeItem('riize_crisis_save_v2');selectedMe='';selectedLover='';state={version:2,screen:'setup',me:'',lover:'',igHandle:'',chapter:0,trust:55,suspicion:12,public:15,igPosts:[],kktLog:[],handled:{},threadsPosts:[],choices:[],ending:''};go('setup')}
-function render(){switch(state.screen){case'intro':intro();break;case'setup':setup();break;case'home':home();break;case'x':xscreen();break;case'ig':ig();break;case'inbox':inbox();break;case'kkt':kkt();break;case'loverchat':loverchat();break;case'threads':threads();break;case'status':status();break;case'schedule':schedule();break;case'notes':notes();break;case'photos':photos();break;case'lysn':lysn();break;default:home()}}
-load();
-if(state.version===2&&state.me&&state.lover){selectedMe=state.me;selectedLover=state.lover;if(state.screen==='setup'||state.screen==='intro')state.screen='home'}else{state.screen='intro'}
-render();
+window.threadReact=i=>showModal('Threads 互动','你停留在这条讨论下。你可以选择不参与猜测，把注意力放回自己的生活。',[{t:'知道了',f:()=>go('threads')}]);
+window.threadCompose=()=>showModal('发布 Threads','你想公开表达什么？',[{t:'希望大家尊重成员隐私',f:()=>{state.choices.push('Threads：呼吁尊重隐私');state.trust+=2;save();go('threads')}},{t:'不发布，继续观察',f:()=>go('threads')}]);
+function lysn(){shell('',`${top('LYSN · 私人消息','home')}<div class="scroll"><div class="storycard"><small class="muted">FROM ${cn[names.indexOf(state.lover)]} · 21:48</small><h3>今天辛苦了 ♡</h3><p>练习结束了吗？记得吃点东西。今天网上的讨论我也看到了，不要一个人担心。</p><p>如果觉得不安，就来找我聊聊。我们一起想办法。</p></div><div class="choices"><small>你想怎么回应这条消息？</small><button class="choice" onclick="lysnReply(0)">「看到你的消息就安心多了。」</button><button class="choice" onclick="lysnReply(1)">「我们最近还是小心一点吧。」</button><button class="choice" onclick="lysnReply(2)">「我想见你，哪怕只有十分钟。」</button></div></div>`)}
+window.lysnReply=i=>{if(i===0)state.trust+=5;if(i===1){state.suspicion-=3;state.trust-=1}if(i===2){state.trust+=6;state.suspicion+=3}state.choices.push('LYSN回复'+i);save();showModal('消息已发送',['你回复了他。他很快回了一个爱心。','他答应最近会谨慎一些，也提醒你别太紧张。','他回复：「等今天行程结束，我去找你。」'][i],[{t:'返回桌面',f:()=>go('home')},{t:'继续聊天',f:()=>go('line')}])};
+function photos(){shell('',`${top('相册 · 最近项目','home')}<div class="scroll"><div class="storycard"><b>最近被粉丝讨论的线索</b><p>这些照片只是故事中的线索描述，不代表真实事件。</p></div>${[['同款衣服','两人在不同日期穿着相似的深灰色连帽外套。'],['上下班时间','两人的离开时间只差了三分钟。'],['收拾与配饰','粉丝发现两人近期使用相似的手机挂饰。'],['IG 小号','小号照片边缘出现疑似另一人的衣袖。']].map(x=>`<div class="xpost"><div class="avatar">▧</div><div><b>${x[0]}</b><p class="postbody">${x[1]}</p></div></div>`).join('')}</div>`)}
+function schedule(){shell('',`${top('日程','home')}<div class="scroll"><div class="storycard"><b>MON · 今日行程</b><p>10:30　团体练习<br>14:00　杂志拍摄<br>18:30　集体下班<br>21:00　私人时间</p></div><div class="storycard"><b>提醒</b><p>今天有粉丝在公司附近等待。是否和恋人一起离开，可能影响被拍到的概率。</p><button class="choice" onclick="scheduleChoice(0)">一起离开</button><button class="choice" onclick="scheduleChoice(1)">分开离开，之后再见</button><button class="choice" onclick="scheduleChoice(2)">让经纪人安排车辆</button></div></div>`)}
+window.scheduleChoice=i=>{state.suspicion+=i===0?14:i===1?-3:-5;state.trust+=i===1?-2:i===0?4:1;save();showModal('行程已更新',['你们一起离开。虽然短暂相处很开心，但有人拍下了背影。','你们分开离开。风险降低了，但恋人发来一句「今天也不能一起走吗？」','经纪人安排了车辆。你们避开了人群，暂时没有新照片。'][i],[{t:'返回手机',f:()=>go('home')}])};
+function notes(){shell('',`${top('备忘录','home')}<div class="scroll"><div class="storycard"><small class="muted">今天 00:17</small><h3>不要忘记的事</h3><p>1. 小号不要再发能看出地点的照片。<br>2. 不要在公开账号留下只有他懂的暗号。<br>3. 如果站姐继续私信，先保存证据。<br>4. 无论发生什么，都要和他好好沟通。</p></div></div>`)}
+function status(){shell('',`${top('关系状态','home')}<div class="scroll"><div class="storycard"><b>你与 ${cn[names.indexOf(state.lover)]} 的关系</b><p>信任程度</p><div class="meter"><i style="width:${clamp(state.trust)}%"></i></div><p>${state.trust}/100</p><p>外界怀疑度</p><div class="meter"><i style="width:${clamp(state.suspicion)}%"></i></div><p>${state.suspicion}/100</p><p>粉圈讨论热度</p><div class="meter"><i style="width:${clamp(state.public)}%"></i></div><p>${state.public}/100</p><span class="pill">恋爱路线：${state.lover}</span><span class="pill">身份：${state.me}</span></div><button class="btn-light" style="margin:10px 15px;width:calc(100% - 30px)" onclick="go('setup')">重新选择成员与恋爱对象</button></div>`)}
+function nextChapter(){state.chapter++;state.suspicion+=state.chapter===2?9:4;state.public+=state.chapter===2?12:5;save();if(state.chapter>=3){ending();return}showModal(state.chapter===2?'新的线索出现了':'风波继续发酵',state.chapter===2?`一张疑似拍到你们同车的照片在粉丝圈流传。有人开始整理时间线，也有人提醒大家不要越界。${state.lover} 发来消息：「我们需要认真谈谈。」`:`讨论没有停止。有人选择相信你们只是关系好，也有人继续寻找所谓的证据。`,[{t:'查看恋人消息',f:()=>go('loverchat')},{t:'查看 X 上的讨论',f:()=>go('x')},{t:'回到手机桌面',f:()=>go('home')}])}
+function ending(){let title,desc;if(state.trust>=58&&state.suspicion<45){title='结局 · 暂时守住的秘密';desc='你们选择坦诚沟通、谨慎处理社交账号，也没有让外界的猜测决定彼此的关系。粉圈讨论逐渐转移，恋情仍然留在只有你们知道的角落。'}else if(state.suspicion>=70){title='结局 · 风暴中心';desc='越来越多的碎片被拼在一起。公司介入处理舆论，你们不得不暂时拉开距离。没有人能替你们决定未来，但这段关系迎来了最艰难的阶段。'}else if(state.trust<40){title='结局 · 渐行渐远';desc='为了避开外界目光，你们减少了联系，却也错过了许多解释的机会。沉默没有让问题消失，反而让彼此开始不安。'}else{title='结局 · 未完待续';desc='风波暂时平息，但你们都知道这并不是最后一次被讨论。接下来要如何面对彼此、粉丝和未来，仍然由你来决定。'}state.ending=title;save();shell('ending',`<div class="eyebrow">RIIZE · LOVE CRISIS SIMULATOR</div><h1>${title}</h1><p>${desc}</p><div class="storycard"><b>本轮结果</b><p>身份：${state.me}<br>恋爱对象：${state.lover}<br>信任：${state.trust}　·　怀疑：${state.suspicion}<br>粉圈热度：${state.public}</p></div><button class="btn-dark" onclick="restart()">重新开始</button><button class="btn-light" style="margin-top:10px" onclick="go('home')">返回手机桌面</button>`)}
+function showModal(title,body,buttons){let old=$('.modalback');if(old)old.remove();let el=document.createElement('div');el.className='modalback';el.innerHTML=`<div class="modal"><h3>${title}</h3><p>${body}</p>${buttons.map((b,i)=>`<button class="${i===0?'btn-dark':'btn-light'}" data-i="${i}">${b.t}</button>`).join('')}</div>`;el.querySelectorAll('button').forEach(b=>b.onclick=()=>{let i=+b.dataset.i;el.remove();buttons[i].f()});app.appendChild(el)}
+function clamp(x){return Math.max(0,Math.min(100,x))}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+window.restart=()=>{localStorage.removeItem('riize_crisis_save');state={screen:'setup',me:'',lover:'',nickname:'',chapter:0,trust:50,suspicion:12,public:18,choices:[],dm:0,igPosts:0,ending:''};render()};
+function render(){switch(state.screen){case'intro':intro();break;case'setup':setup();break;case'home':home();break;case'line':line();break;case'threads':threads();break;case'lysn':lysn();break;case'loverchat':loverchat();break;case'x':xscreen();break;case'ig':ig();break;case'dm':dm();break;case'openDM':openDM();break;case'photos':photos();break;case'schedule':schedule();break;case'notes':notes();break;case'status':status();break;default:home()}}
+load();if(state.me&&state.lover&&state.screen!=='intro'&&state.screen!=='setup'){}else state.screen='intro';render();
 })();
 </script></body></html>
